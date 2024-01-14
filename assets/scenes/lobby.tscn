@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=3 uid="uid://fudacns2hhxc"]
+
+[ext_resource type="PackedScene" uid="uid://dh4s221kgtc83" path="res://assets/scenes/player.tscn" id="1_dl7al"]
+[ext_resource type="Texture2D" uid="uid://druxpraxh7kd4" path="res://assets/art/droga.png" id="2_0lalm"]
+[ext_resource type="PackedScene" uid="uid://bptxe5n601tay" path="res://assets/scenes/drzwi.tscn" id="3_ov6w6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cmtqn"]
+size = Vector2(95, 200)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3mbdq"]
+size = Vector2(8.33325, 202.333)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1qgx6"]
+size = Vector2(6.66669, 157.333)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_dl7al")]
+z_index = 2
+position = Vector2(182, 809)
+collision_mask = 6
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+limit_left = 20
+limit_top = 20
+limit_right = 2705
+limit_bottom = 1275
+limit_smoothed = true
+editor_draw_limits = true
+
+[node name="PlayerDetector" type="Area2D" parent="Player"]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/PlayerDetector"]
+position = Vector2(8.5, 2)
+shape = SubResource("RectangleShape2D_cmtqn")
+debug_color = Color(0, 0, 0, 0.419608)
+
+[node name="Background" type="StaticBody2D" parent="."]
+position = Vector2(1367, 642)
+scale = Vector2(3, 3)
+collision_layer = 2
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Background"]
+z_index = -1
+texture = ExtResource("2_0lalm")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background"]
+polygon = PackedVector2Array(-450, 1, -420, -20, -370, -32, -303, -37, -237, -33, -169, -18, -122, 6, -76, 25, -37, 29, 22, 26, 79, 17, 127, -7, 193, -33, 237, -53, 296, -61, 358, -51, 417, -28, 453, -9, 453, -210, -452, -211)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Background"]
+polygon = PackedVector2Array(-452, 197, -355, 183, -273, 171, -196, 168, -111, 170, -39, 181, 48, 189, 133, 190, 199, 169, 264, 131, 320, 107, 385, 105, 430, 126, 451, 134, 452, 213, -452, 215)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Background"]
+position = Vector2(-449.167, 94.5)
+shape = SubResource("RectangleShape2D_3mbdq")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Background"]
+position = Vector2(448.667, 61)
+shape = SubResource("RectangleShape2D_1qgx6")
+
+[node name="Drzwi" parent="." instance=ExtResource("3_ov6w6")]
+
+[connection signal="area_entered" from="Player/PlayerDetector" to="Drzwi" method="_on_player_detector_area_entered"]
+[connection signal="area_entered" from="Drzwi" to="Player" method="_on_drzwi_area_entered"]
