@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bptxe5n601tay"]
+
+[ext_resource type="Script" path="res://assets/scripts/Drzwi.gd" id="1_2ljfy"]
+[ext_resource type="Texture2D" uid="uid://do2mmmt05g2q7" path="res://assets/art/drzwi.png" id="2_c74y6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jh4p8"]
+size = Vector2(154, 212)
+
+[node name="Drzwi" type="Area2D"]
+z_index = 1
+position = Vector2(-24, 9)
+collision_layer = 5
+script = ExtResource("1_2ljfy")
+metadata/_edit_group_ = true
+metadata/direction = "off"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(444, 807)
+shape = SubResource("RectangleShape2D_jh4p8")
+debug_color = Color(0, 0.623529, 0.552941, 0.419608)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(444, 806)
+texture = ExtResource("2_c74y6")
