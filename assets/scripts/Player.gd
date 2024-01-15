@@ -12,43 +12,52 @@ func _ready():
 	get_tree().root.content_scale_mode = Window.CONTENT_SCALE_MODE_VIEWPORT	
 	
 func _process(delta):
-	velocity = Vector2.ZERO
-	var move_right = Input.is_action_pressed("move_right")
-	var move_left = Input.is_action_pressed("move_left")
-	var move_down = Input.is_action_pressed("move_down")
-	var move_up = Input.is_action_pressed("move_up")
+	var controls = {
+		move_right = Input.is_action_pressed("move_right"),
+		move_left = Input.is_action_pressed("move_left"),
+		move_down = Input.is_action_pressed("move_down"),
+		move_up = Input.is_action_pressed("move_up"),
+	}
 	if freeze:
-		move_right = false;
-		move_left = false;
-		move_down = false;
-		move_up = false;
+		controls.move_right = false;
+		controls.move_left = false;
+		controls.move_down = false;
+		controls.move_up = false;
 		
+	
 	if force != "off":
 		match(force):
 			"right":
-				move_right = true
+				controls.move_right = true
 			"left":
-				move_left = true
+				controls.move_left = true
 			"down":
-				move_down = true
+				controls.move_down = true
 			"up":
-				move_up = true
+				controls.move_up = true
+	normal_movement(controls)
 		
-		
-	if move_right:
+func normal_movement(controls : Dictionary):
+	velocity = Vector2.ZERO
+	if controls.move_right:
 		velocity.x += 1
-	if move_left:
+		$Sprite2D.flip_h = false
+		$Sprite2D/AnimationPlayer.play("walk_right")
+	if controls.move_left:
 		velocity.x -= 1
-	if move_down:
+		$Sprite2D.flip_h = true
+		$Sprite2D/AnimationPlayer.play("walk_right")
+	if controls.move_down:
 		velocity.y += 1
-	if move_up:
+		$Sprite2D/AnimationPlayer.play("walk_down")
+	if controls.move_up:
 		velocity.y -= 1
+		$Sprite2D/AnimationPlayer.play("walk_up")
 
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
-		#$AnimatedSprite2D.play("default")
-	#else:
-		#$AnimatedSprite2D.stop()
+	else:
+		$Sprite2D/AnimationPlayer.stop()
 	
 		
 func _physics_process(delta):
@@ -60,6 +69,6 @@ func _physics_process(delta):
 func on_door_enter(direction):
 	freeze = true
 	force = direction
-	$Sprite2D/AnimationPlayer.play("smoll")
+	#$Sprite2D/AnimationPlayer.play("smoll")
 	print("ok")
 	
