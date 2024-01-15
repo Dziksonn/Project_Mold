@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bptxe5n601tay" path="res://assets/scenes/drzwi.tscn" id="3_ov6w6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cmtqn"]
-size = Vector2(95, 200)
+size = Vector2(24.3333, 78)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3mbdq"]
 size = Vector2(8.33325, 202.333)
@@ -17,7 +17,7 @@ size = Vector2(6.66669, 157.333)
 
 [node name="Player" parent="." instance=ExtResource("1_dl7al")]
 z_index = 2
-position = Vector2(182, 809)
+position = Vector2(174, 889)
 collision_mask = 6
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -32,7 +32,7 @@ editor_draw_limits = true
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/PlayerDetector"]
-position = Vector2(8.5, 2)
+position = Vector2(0.166667, -0.333333)
 shape = SubResource("RectangleShape2D_cmtqn")
 debug_color = Color(0, 0, 0, 0.419608)
 
@@ -41,6 +41,7 @@ position = Vector2(1367, 642)
 scale = Vector2(3, 3)
 collision_layer = 2
 metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Background"]
 z_index = -1
@@ -61,6 +62,4 @@ position = Vector2(448.667, 61)
 shape = SubResource("RectangleShape2D_1qgx6")
 
 [node name="Drzwi" parent="." instance=ExtResource("3_ov6w6")]
-
-[connection signal="area_entered" from="Player/PlayerDetector" to="Drzwi" method="_on_player_detector_area_entered"]
-[connection signal="area_entered" from="Drzwi" to="Player" method="_on_drzwi_area_entered"]
+position = Vector2(-265, 361)
