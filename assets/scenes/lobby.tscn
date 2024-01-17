@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://fudacns2hhxc"]
+[gd_scene load_steps=8 format=3 uid="uid://fudacns2hhxc"]
 
 [ext_resource type="PackedScene" uid="uid://dh4s221kgtc83" path="res://assets/scenes/player.tscn" id="1_dl7al"]
 [ext_resource type="Texture2D" uid="uid://druxpraxh7kd4" path="res://assets/art/droga.png" id="2_0lalm"]
+[ext_resource type="Texture2D" uid="uid://bovreaypyosqx" path="res://assets/art/boss_debug.png" id="2_hpigx"]
 [ext_resource type="PackedScene" uid="uid://bptxe5n601tay" path="res://assets/scenes/drzwi.tscn" id="3_ov6w6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cmtqn"]
@@ -13,12 +14,17 @@ size = Vector2(8.33325, 202.333)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1qgx6"]
 size = Vector2(6.66669, 157.333)
 
-[node name="Node2D" type="Node2D"]
+[node name="lobby" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_dl7al")]
 z_index = 2
-position = Vector2(174, 889)
+position = Vector2(216, 882)
 collision_mask = 6
+
+[node name="boss_mode" type="Sprite2D" parent="Player"]
+position = Vector2(0.333334, -52.6667)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_hpigx")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 limit_left = 20
@@ -62,4 +68,4 @@ position = Vector2(448.667, 61)
 shape = SubResource("RectangleShape2D_1qgx6")
 
 [node name="Drzwi" parent="." instance=ExtResource("3_ov6w6")]
-position = Vector2(-265, 361)
+position = Vector2(1670, 249)
