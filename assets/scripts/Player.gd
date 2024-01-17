@@ -1,15 +1,23 @@
 extends CharacterBody2D
 
 @export var speed = 400 # How fast the player will move (pixels/sec).
-@export var boss_fight = false
+@export var jump_velocity = -500
+@export var gravity = 900
 var Velocity = Vector2()
 var screen_size # Size of the game window.
 var freeze = false
 var force = "off"
+var dev_ui
 
 func _ready():
 	screen_size = get_viewport_rect().size
-	get_tree().root.content_scale_mode = Window.CONTENT_SCALE_MODE_VIEWPORT	
+	Global.set_scene_name(get_parent().name)
+	dev_ui = get_node("dev_ui")
+	if is_instance_valid(dev_ui):
+		if DevMenu.Status:
+			dev_ui.visible = true
+		else:
+			dev_ui.visible = false
 	
 func _process(delta):
 	var controls = {
@@ -35,18 +43,24 @@ func _process(delta):
 				controls.move_down = true
 			"up":
 				controls.move_up = true
-	normal_movement(controls)
+	if !Global.boss_fight:
+		normal_movement(controls)
+	else:
+		boss_movement(controls, delta)
+		pass
 		
 func normal_movement(controls : Dictionary):
 	velocity = Vector2.ZERO
 	if controls.move_right:
 		velocity.x += 1
 		$Sprite2D.flip_h = false
-		$Sprite2D/AnimationPlayer.play("walk_right")
+		if !controls.move_down and !controls.move_up:
+			$Sprite2D/AnimationPlayer.play("walk_right")
 	if controls.move_left:
 		velocity.x -= 1
-		$Sprite2D.flip_h = true
-		$Sprite2D/AnimationPlayer.play("walk_right")
+		if !controls.move_down and !controls.move_up:
+			$Sprite2D.flip_h = true
+			$Sprite2D/AnimationPlayer.play("walk_right")
 	if controls.move_down:
 		velocity.y += 1
 		$Sprite2D/AnimationPlayer.play("walk_down")
@@ -58,13 +72,27 @@ func normal_movement(controls : Dictionary):
 		velocity = velocity.normalized() * speed
 	else:
 		$Sprite2D/AnimationPlayer.stop()
+		
+func boss_movement(controls : Dictionary, delta):
+	if not is_on_floor():
+		velocity.y += gravity * delta
+	if controls.move_up and is_on_floor():
+		velocity.y = jump_velocity
+	if controls.move_right:
+		velocity.x = 1 * speed
+		$Sprite2D.flip_h = false
+		$Sprite2D/AnimationPlayer.play("walk_right")
+	elif controls.move_left:
+		velocity.x = -1 * speed
+		$Sprite2D.flip_h = true
+		$Sprite2D/AnimationPlayer.play("walk_right")
+	else:
+		velocity.x = move_toward(velocity.x, 0, speed)
+		$Sprite2D/AnimationPlayer.stop()
 	
 		
 func _physics_process(delta):
 	move_and_slide()
-	for i in get_slide_collision_count():
-		var collision = get_slide_collision(i)
-		#print("I collided with ", collision.get_collider().name)
 		
 func on_door_enter(direction):
 	freeze = true
