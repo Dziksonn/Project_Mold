@@ -9,20 +9,19 @@ size = Vector2(1557, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_va4iq"]
 size = Vector2(24.3333, 78)
 
-[node name="debug_scene" type="Node2D"]
+[node name="boss_scene" type="Node2D"]
 
 [node name="DebugBg" type="Sprite2D" parent="."]
 position = Vector2(1446, 641)
 scale = Vector2(2, 2)
 texture = ExtResource("1_k3co1")
 
-[node name="Area2D" type="Area2D" parent="DebugBg"]
+[node name="StaticBody2D" type="StaticBody2D" parent="DebugBg"]
 position = Vector2(-723, -320.5)
 scale = Vector2(0.5, 0.5)
-collision_layer = 6
-collision_mask = 7
+collision_layer = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DebugBg/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DebugBg/StaticBody2D"]
 position = Vector2(1557, 1276)
 scale = Vector2(2, 2)
 shape = SubResource("RectangleShape2D_j4vt8")
@@ -31,6 +30,7 @@ shape = SubResource("RectangleShape2D_j4vt8")
 z_index = 2
 position = Vector2(109, 1110)
 collision_mask = 6
+metadata/_edit_group_ = true
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 limit_left = 20
