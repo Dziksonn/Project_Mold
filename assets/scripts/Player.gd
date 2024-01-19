@@ -14,6 +14,7 @@ func _ready():
 	Global.set_scene_name(get_parent().name)
 	dev_ui = get_node("dev_ui")
 	DevMenu.Ui_update()
+	DevMenu.Player_toggle_noclip.connect(_player_toggle_noclip)
 
 func _process(delta):
 	var controls = {
@@ -102,4 +103,15 @@ func on_door_enter(direction, targetScene):
 	await $Sprite2D/DoorAnimation.animation_finished
 	SceneTransition.change_scene(targetScene)
 	print("ok")
+
+func _player_toggle_noclip(noclip : bool):
+	freeze = false
+	if noclip:
+		set_collision_layer_value(1, false)
+		set_collision_mask_value(2, false)
+		set_collision_mask_value(3, false)
+	else:
+		set_collision_layer_value(1, true)
+		set_collision_mask_value(2, true)
+		set_collision_mask_value(3, true)
 
