@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dh4s221kgtc83"]
+[gd_scene load_steps=12 format=3 uid="uid://dh4s221kgtc83"]
 
 [ext_resource type="Script" path="res://assets/scripts/player.gd" id="1_216rl"]
 [ext_resource type="Texture2D" uid="uid://wo22c5ole6cp" path="res://assets/art/player.png" id="2_gif0e"]
@@ -124,6 +124,44 @@ _data = {
 "walk_up": SubResource("Animation_j40lu")
 }
 
+[sub_resource type="Animation" id="Animation_lg0he"]
+resource_name = "smoll"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_jkewm"]
+resource_name = "RESET"
+length = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_id0dm"]
+_data = {
+"RESET": SubResource("Animation_jkewm"),
+"smoll": SubResource("Animation_lg0he")
+}
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qgisa"]
 size = Vector2(20.3333, 79.6667)
 
@@ -141,6 +179,11 @@ frame = 9
 root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_6tx6x")
+}
+
+[node name="DoorAnimation" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_id0dm")
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
