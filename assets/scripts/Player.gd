@@ -11,12 +11,13 @@ var dev_ui
 
 func _ready():
 	screen_size = get_viewport_rect().size
-	Global.set_scene_name(get_parent().name)
-	dev_ui = get_node("dev_ui")
+	Global.set_scene(get_parent().name)
 	DevMenu.Ui_update()
 	DevMenu.Player_toggle_noclip.connect(_player_toggle_noclip)
+	Global.player_died.connect(_kill_player)
 
 func _process(delta):
+
 	var controls = {
 		move_right = Input.is_action_pressed("move_right"),
 		move_left = Input.is_action_pressed("move_left"),
@@ -114,4 +115,7 @@ func _player_toggle_noclip(noclip : bool):
 		set_collision_layer_value(1, true)
 		set_collision_mask_value(2, true)
 		set_collision_mask_value(3, true)
+
+func _kill_player():
+	queue_free()
 

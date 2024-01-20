@@ -26,6 +26,8 @@ func Ui_update():
 		[b]B[/b]oss Mode: {status}\n
 		[b]L[/b]obby teleport\n
 		[b]N[/b]oclip\n
+		[b]Up[/b] Heal
+		[b]Down[/b] Damage
 		"
 		.format({"status": Global.boss_fight}))
 
@@ -42,11 +44,20 @@ func toggle_noclip():
 	Ui_update()
 	emit_signal("Player_toggle_noclip", noclip)
 
+func heal_player():
+	Global.player_heal.emit()
+
+func damage_player():
+	Global.player_damage.emit(10)
+
+
 func _process(_delta):
 	var dev_godmode = Input.is_action_just_pressed("dev_godmode")
 	var dev_boss_mode = Input.is_action_just_pressed("dev_bossmode")
 	var dev_tp_lobby = Input.is_action_just_pressed("dev_tp_lobby")
 	var dev_noclip = Input.is_action_just_pressed("dev_noclip")
+	var dev_heal = Input.is_action_just_pressed("dev_heal")
+	var dev_damage = Input.is_action_just_pressed("dev_damage")
 	if dev_godmode:
 		toggle_godmode()
 	if dev_boss_mode:
@@ -55,3 +66,7 @@ func _process(_delta):
 		SceneTransition.change_scene("res://assets/scenes/lobby.tscn")
 	if dev_noclip:
 		toggle_noclip()
+	if dev_heal:
+		heal_player()
+	if dev_damage:
+		damage_player()

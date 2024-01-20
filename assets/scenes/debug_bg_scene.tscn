@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://csfjlw13h66h6"]
+[gd_scene load_steps=6 format=3 uid="uid://csfjlw13h66h6"]
 
 [ext_resource type="Texture2D" uid="uid://dvjr40myqn714" path="res://assets/art/debug_bg.png" id="1_k3co1"]
 [ext_resource type="PackedScene" uid="uid://dh4s221kgtc83" path="res://assets/scenes/player.tscn" id="2_3it2h"]
+[ext_resource type="PackedScene" uid="uid://c03fj8xv24mpd" path="res://assets/scenes/player_ui.tscn" id="3_8wlmp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j4vt8"]
 size = Vector2(1557, 20)
@@ -47,3 +48,5 @@ collision_mask = 4
 position = Vector2(0.166667, -0.333333)
 shape = SubResource("RectangleShape2D_va4iq")
 debug_color = Color(0, 0, 0, 0.419608)
+
+[node name="player_ui" parent="." instance=ExtResource("3_8wlmp")]
