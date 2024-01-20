@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c03fj8xv24mpd"]
 
 [ext_resource type="Texture2D" uid="uid://c3gft6sovajkj" path="res://assets/art/healthbar_under.png" id="1_g3l81"]
-[ext_resource type="Script" path="res://assets/scripts/player_ui.gd" id="1_p1881"]
+[ext_resource type="Script" path="res://assets/scripts/PlayerUI.gd" id="1_p1881"]
 [ext_resource type="Texture2D" uid="uid://ch38rv32suios" path="res://assets/art/healthbar_progress.png" id="2_8ly2n"]
 
 [node name="player_ui" type="CanvasLayer"]
