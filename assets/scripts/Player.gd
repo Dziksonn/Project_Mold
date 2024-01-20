@@ -10,7 +10,7 @@ var force = "off"
 var dev_ui
 var canAttack = true
 var attackSpeed = 1 # = 1 attack per seccond
-var FacingDirection = "Down"
+var FacingDirection : Array
 
 #Nie mam pomyslu jak to lepiej zrobić niż przechowujac liste przeciwnikow w zasiegu
 var DownEnemies = Array()
@@ -63,26 +63,25 @@ func _process(delta):
 	if controls.dev_menu:
 		DevMenu.Toggle()
 		
-
-	
 	#Nie wiem czy nie mozna tego wruzcic do ifa z normal_movement() 
 	#ale potrzebujemy pierwszeństwo do atakowania góra i dół bo jak idziemy po ukosie to patrzymy sie w góre lub w dół
 	if(controls.move_up):
-		FacingDirection = "Up"
+		FacingDirection = UpEnemies
 	elif(controls.move_down):
-		FacingDirection = "Down"
+		FacingDirection = DownEnemies
 	elif(controls.move_left):
-		FacingDirection = "Left"
+		FacingDirection = LeftEnemies
 	elif(controls.move_right):
-		FacingDirection = "Right"
+		FacingDirection = RightEnemies
 		
 	if controls.attack:
 		attack()
 
 func attack():
 	if(canAttack):
-		if(FacingDirection == "Up"):
-			print("UP")
+		for enemy in FacingDirection:
+			enemy.get_parent().recievedamage(10)
+
 
 func normal_movement(controls : Dictionary):
 	velocity = Vector2.ZERO
@@ -154,24 +153,32 @@ func _kill_player():
 	queue_free()
 
 func _on_enemy_down_area_entered(area):
-	print('down')
-	if(area.get_meta("CollisionType") == "Enemy"):
-		DownEnemies.push_front(area)
+	DownEnemies.push_front(area)
 
 
 func _on_enemy_right_area_entered(area):
-	print('right')
-	if(area.get_meta("CollisionType") == "Enemy"):
-		RightEnemies.push_front(area)
+	RightEnemies.push_front(area)
 
 
 func _on_enemy_left_area_entered(area):
-	print('left')
-	if(area.get_meta("CollisionType") == "Enemy"):
-		LeftEnemies.push_front(area)
+	LeftEnemies.push_front(area)
 
 
 func _on_enemy_up_area_entered(area):
-	print('up')
-	if(area.get_meta("CollisionType") == "Enemy"):
-		UpEnemies.push_front(area)
+	UpEnemies.push_front(area)
+
+
+func _on_enemy_down_area_exited(area):
+	DownEnemies.remove_at(DownEnemies.bsearch(area))
+
+
+func _on_enemy_right_area_exited(area):
+	RightEnemies.remove_at(RightEnemies.bsearch(area))
+
+
+func _on_enemy_left_area_exited(area):
+	LeftEnemies.remove_at(LeftEnemies.bsearch(area))
+
+
+func _on_enemy_up_area_exited(area):
+	UpEnemies.remove_at(UpEnemies.bsearch(area))

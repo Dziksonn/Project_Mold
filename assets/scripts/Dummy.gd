@@ -6,6 +6,7 @@ extends Sprite2D
 func _process(delta):
 	pass
 
-func GetDamaged(Amount):
+func recievedamage(Amount):
 	Health-=Amount
-	print(Health)
+	if Health <= 0:
+		queue_free()

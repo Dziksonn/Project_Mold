@@ -203,6 +203,7 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackAreas/Down"]
 position = Vector2(0, 35.3333)
 shape = SubResource("RectangleShape2D_dsr0b")
+debug_color = Color(0.992157, 0.0862745, 0, 0.0784314)
 
 [node name="Right" type="Area2D" parent="AttackAreas"]
 position = Vector2(35, -39.3333)
@@ -212,6 +213,7 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackAreas/Right"]
 position = Vector2(0, 35.3333)
 shape = SubResource("RectangleShape2D_dsr0b")
+debug_color = Color(0.992157, 0.0862745, 0, 0.0784314)
 
 [node name="Left" type="Area2D" parent="AttackAreas"]
 position = Vector2(-34.6667, -39.3333)
@@ -221,6 +223,7 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackAreas/Left"]
 position = Vector2(0, 35.3333)
 shape = SubResource("RectangleShape2D_dsr0b")
+debug_color = Color(0.992157, 0.0862745, 0, 0.0784314)
 
 [node name="Up" type="Area2D" parent="AttackAreas"]
 position = Vector2(0.333333, -69.3333)
@@ -230,8 +233,13 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackAreas/Up"]
 position = Vector2(0, 35.3333)
 shape = SubResource("RectangleShape2D_dsr0b")
+debug_color = Color(0.992157, 0.0862745, 0, 0.0784314)
 
 [connection signal="area_entered" from="AttackAreas/Down" to="." method="_on_enemy_down_area_entered"]
+[connection signal="area_exited" from="AttackAreas/Down" to="." method="_on_enemy_down_area_exited"]
 [connection signal="area_entered" from="AttackAreas/Right" to="." method="_on_enemy_right_area_entered"]
+[connection signal="area_exited" from="AttackAreas/Right" to="." method="_on_enemy_right_area_exited"]
 [connection signal="area_entered" from="AttackAreas/Left" to="." method="_on_enemy_left_area_entered"]
+[connection signal="area_exited" from="AttackAreas/Left" to="." method="_on_enemy_left_area_exited"]
 [connection signal="area_entered" from="AttackAreas/Up" to="." method="_on_enemy_up_area_entered"]
+[connection signal="area_exited" from="AttackAreas/Up" to="." method="_on_enemy_up_area_exited"]

@@ -63,9 +63,18 @@ scale = Vector2(2, 2)
 texture = ExtResource("4_3mmxp")
 script = ExtResource("5_0jffg")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Dummy"]
+[node name="Hitbox" type="Area2D" parent="Dummy"]
 collision_layer = 8
+collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Dummy/StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dummy/Hitbox"]
+position = Vector2(0, 1.25)
+shape = SubResource("RectangleShape2D_to627")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="Dummy"]
+collision_layer = 8
+collision_mask = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dummy/CharacterBody2D"]
 position = Vector2(0, 1.25)
 shape = SubResource("RectangleShape2D_to627")
