@@ -11,4 +11,3 @@ func trigger_player_door_func(direction):
 	var player = owner.get_node("Player")
 	player.on_door_enter(direction, targetScene)
 
-

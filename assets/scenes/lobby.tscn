@@ -64,6 +64,7 @@ shape = SubResource("RectangleShape2D_1qgx6")
 
 [node name="Drzwi" parent="." instance=ExtResource("3_ov6w6")]
 position = Vector2(40, -359)
+collision_layer = 4
 targetScene = "res://assets/scenes/debug_bg_scene.tscn"
 metadata/direction = "up"
 

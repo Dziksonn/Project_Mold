@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dh4s221kgtc83"]
+[gd_scene load_steps=13 format=3 uid="uid://dh4s221kgtc83"]
 
 [ext_resource type="Script" path="res://assets/scripts/player.gd" id="1_216rl"]
 [ext_resource type="Texture2D" uid="uid://wo22c5ole6cp" path="res://assets/art/player.png" id="2_gif0e"]
@@ -165,6 +165,9 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qgisa"]
 size = Vector2(20.3333, 79.6667)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dsr0b"]
+size = Vector2(46.6667, 39.3333)
+
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(3, 3)
 script = ExtResource("1_216rl")
@@ -190,3 +193,45 @@ libraries = {
 visible = false
 position = Vector2(-1.83333, 1.5)
 shape = SubResource("RectangleShape2D_qgisa")
+
+[node name="AttackAreas" type="Node2D" parent="."]
+
+[node name="Down" type="Area2D" parent="AttackAreas"]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackAreas/Down"]
+position = Vector2(0, 35.3333)
+shape = SubResource("RectangleShape2D_dsr0b")
+
+[node name="Right" type="Area2D" parent="AttackAreas"]
+position = Vector2(35, -39.3333)
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackAreas/Right"]
+position = Vector2(0, 35.3333)
+shape = SubResource("RectangleShape2D_dsr0b")
+
+[node name="Left" type="Area2D" parent="AttackAreas"]
+position = Vector2(-34.6667, -39.3333)
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackAreas/Left"]
+position = Vector2(0, 35.3333)
+shape = SubResource("RectangleShape2D_dsr0b")
+
+[node name="Up" type="Area2D" parent="AttackAreas"]
+position = Vector2(0.333333, -69.3333)
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackAreas/Up"]
+position = Vector2(0, 35.3333)
+shape = SubResource("RectangleShape2D_dsr0b")
+
+[connection signal="area_entered" from="AttackAreas/Down" to="." method="_on_enemy_down_area_entered"]
+[connection signal="area_entered" from="AttackAreas/Right" to="." method="_on_enemy_right_area_entered"]
+[connection signal="area_entered" from="AttackAreas/Left" to="." method="_on_enemy_left_area_entered"]
+[connection signal="area_entered" from="AttackAreas/Up" to="." method="_on_enemy_up_area_entered"]

@@ -1,14 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://csfjlw13h66h6"]
+[gd_scene load_steps=9 format=3 uid="uid://csfjlw13h66h6"]
 
 [ext_resource type="Texture2D" uid="uid://dvjr40myqn714" path="res://assets/art/debug_bg.png" id="1_k3co1"]
 [ext_resource type="PackedScene" uid="uid://dh4s221kgtc83" path="res://assets/scenes/player.tscn" id="2_3it2h"]
 [ext_resource type="PackedScene" uid="uid://c03fj8xv24mpd" path="res://assets/scenes/player_ui.tscn" id="3_8wlmp"]
+[ext_resource type="Texture2D" uid="uid://b0thbimj1uh8j" path="res://assets/art/pizza.png" id="4_3mmxp"]
+[ext_resource type="Script" path="res://assets/scripts/Dummy.gd" id="5_0jffg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j4vt8"]
 size = Vector2(1557, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_va4iq"]
 size = Vector2(24.3333, 78)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_to627"]
+size = Vector2(65, 63.5)
 
 [node name="boss_scene" type="Node2D"]
 
@@ -30,7 +35,7 @@ shape = SubResource("RectangleShape2D_j4vt8")
 [node name="Player" parent="." instance=ExtResource("2_3it2h")]
 z_index = 2
 position = Vector2(109, 1110)
-collision_mask = 6
+collision_mask = 14
 metadata/_edit_group_ = true
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -42,6 +47,7 @@ limit_smoothed = true
 editor_draw_limits = true
 
 [node name="PlayerDetector" type="Area2D" parent="Player"]
+position = Vector2(0, -0.333333)
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/PlayerDetector"]
@@ -50,3 +56,16 @@ shape = SubResource("RectangleShape2D_va4iq")
 debug_color = Color(0, 0, 0, 0.419608)
 
 [node name="player_ui" parent="." instance=ExtResource("3_8wlmp")]
+
+[node name="Dummy" type="Sprite2D" parent="."]
+position = Vector2(636, 900)
+scale = Vector2(2, 2)
+texture = ExtResource("4_3mmxp")
+script = ExtResource("5_0jffg")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Dummy"]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dummy/StaticBody2D"]
+position = Vector2(0, 1.25)
+shape = SubResource("RectangleShape2D_to627")
