@@ -42,13 +42,13 @@ func _damage_player(number):
 	Player_temp_data.hp -= number
 	if Player_temp_data.hp <= 0:
 		kill_player()
-	print("Damage")
-	print(Player_temp_data.hp)
+	#print("Damage")
+	#print(Player_temp_data.hp)
 
 func _heal_player():
 	Player_temp_data.hp = Player_temp_data.max_hp
-	print("Heal")
-	print(Player_temp_data.hp)
+	#print("Heal")
+	#print(Player_temp_data.hp)
 
 func kill_player():
 	Player_temp_data.is_dead = true

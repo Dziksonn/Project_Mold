@@ -69,6 +69,7 @@ speed = 200
 damage = 5
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(58, -159)
 navigation_polygon = SubResource("NavigationPolygon_nxbjw")
 navigation_layers = 9
 

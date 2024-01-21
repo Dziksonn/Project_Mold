@@ -35,8 +35,6 @@ size = Vector2(109, 63)
 
 [node name="Player" parent="." instance=ExtResource("1_ir8m2")]
 position = Vector2(48, 586)
-collision_mask = 6
-metadata/_edit_group_ = true
 
 [node name="PlayerDetector" type="Area2D" parent="Player"]
 collision_mask = 4
