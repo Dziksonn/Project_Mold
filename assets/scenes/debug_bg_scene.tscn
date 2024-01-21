@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://csfjlw13h66h6"]
+[gd_scene load_steps=9 format=3 uid="uid://csfjlw13h66h6"]
 
 [ext_resource type="Texture2D" uid="uid://dvjr40myqn714" path="res://assets/art/debug_bg.png" id="1_k3co1"]
 [ext_resource type="PackedScene" uid="uid://dh4s221kgtc83" path="res://assets/scenes/player.tscn" id="2_3it2h"]
@@ -8,13 +8,16 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j4vt8"]
 size = Vector2(1557, 20)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k3nvg"]
+size = Vector2(34, 1308)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_va4iq"]
 size = Vector2(24.3333, 78)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_nxbjw"]
-vertices = PackedVector2Array(1029, 1174, 381, 1189, 396, 621, 1071, 610)
+vertices = PackedVector2Array(1306, 435, 1162, 1190, 381, 1190, 356, 431)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(387, 612, 1082, 600, 1039, 1184, 371, 1200)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(346, 421, 1319, 426, 1170, 1200, 371, 1200)])
 source_geometry_group_name = &"navigation_polygon_source_group"
 
 [node name="boss_scene" type="Node2D"]
@@ -34,6 +37,10 @@ collision_layer = 2
 position = Vector2(1557, 1276)
 scale = Vector2(2, 2)
 shape = SubResource("RectangleShape2D_j4vt8")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DebugBg/StaticBody2D"]
+position = Vector2(7, 644)
+shape = SubResource("RectangleShape2D_k3nvg")
 
 [node name="Player" parent="." instance=ExtResource("2_3it2h")]
 z_index = 2

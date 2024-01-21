@@ -9,14 +9,8 @@ var force = "off"
 var dev_ui
 var canAttack = true
 var attackSpeed = 1 # = 1 attack per seccond
-var facingDirectionArray : Array
 var facingDirectionVector : Vector2
 
-#Nie mam pomyslu jak to lepiej zrobić niż przechowujac liste przeciwnikow w zasiegu
-var downEnemies = Array()
-var upEnemies = Array()
-var leftEnemies = Array()
-var rightEnemies = Array()
 
 func _ready():
 	screen_size = get_viewport_rect().size
@@ -61,7 +55,8 @@ func _process(delta):
 	if controls.dev_menu:
 		DevMenu.Toggle()
 
-
+	$Sprite2D/KnifeSprite.look_at(get_global_mouse_position())
+	
 	#Nie wiem czy nie mozna tego wruzcic do ifa z normal_movement()
 	#ale potrzebujemy pierwszeństwo do atakowania góra i dół bo jak idziemy po ukosie to patrzymy sie w góre lub w dół
 	if(controls.move_up):
@@ -72,52 +67,41 @@ func _process(delta):
 		facingDirectionVector = Vector2(-1, 0)
 	elif(controls.move_right):
 		facingDirectionVector = Vector2(1, 0)
-	
 	if(controls.attack):
-		downEnemies = $AttackAreas/Down.get_overlapping_areas()
-		upEnemies = $AttackAreas/Up.get_overlapping_areas()
-		leftEnemies = $AttackAreas/Left.get_overlapping_areas()
-		rightEnemies = $AttackAreas/Right.get_overlapping_areas()
-	#Trzeba to było odizolować, bo wczesniej tylko po ruszeniu sie zmieniała się lista przeciwnikow
-	match facingDirectionVector:
-		Vector2(0,-1): 
-			facingDirectionArray = upEnemies
-		Vector2(0,1):
-			facingDirectionArray = downEnemies
-		Vector2(-1,0):
-			facingDirectionArray = leftEnemies
-		Vector2(1,0):
-			facingDirectionArray = rightEnemies
-	if controls.attack:
 		attack()
 
 func attack():
-	if(canAttack):
-		
-		for enemy in facingDirectionArray:
-			if enemy != null:
-				if enemy.name == "Hitbox":
-					enemy.get_parent().receiveDamage(10, facingDirectionVector)
+	$Sprite2D/KnifeAnimation.play("attack")
+	await $Sprite2D/KnifeAnimation.animation_finished
+	
+	for enemy in $Sprite2D/KnifeSprite/Area2D.get_overlapping_areas():
+		var knockbackVector = Vector2.RIGHT.rotated($Sprite2D/KnifeSprite.rotation)
+		enemy.get_parent().receiveDamage(10,knockbackVector)
+	
+	$Sprite2D/KnifeAnimation.play_backwards("attack")
+	pass
 
 
 func normal_movement(controls : Dictionary):
 	velocity = Vector2.ZERO
 	if controls.move_right:
 		velocity.x += 1
-		$Sprite2D.flip_h = false
 		if !controls.move_down and !controls.move_up:
 			$Sprite2D/AnimationPlayer.play("walk_right")
+			
 	if controls.move_left:
 		velocity.x -= 1
 		if !controls.move_down and !controls.move_up:
-			$Sprite2D.flip_h = true
-			$Sprite2D/AnimationPlayer.play("walk_right")
+			$Sprite2D/AnimationPlayer.play("walk_left")
+
 	if controls.move_down:
 		velocity.y += 1
 		$Sprite2D/AnimationPlayer.play("walk_down")
+
 	if controls.move_up:
 		velocity.y -= 1
 		$Sprite2D/AnimationPlayer.play("walk_up")
+
 
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
@@ -173,34 +157,3 @@ func _player_damage(_number):
 	$Sprite2D.modulate	= Color(1, 0.4, 0.4)
 	await get_tree().create_timer(0.4).timeout
 	$Sprite2D.modulate	= Color(1, 1, 1)
-
-#func _on_enemy_down_area_entered(area):
-	#downEnemies.push_front(area)
-#
-#
-#func _on_enemy_right_area_entered(area):
-	#rightEnemies.push_front(area)
-#
-#
-#func _on_enemy_left_area_entered(area):
-	#leftEnemies.push_front(area)
-#
-#
-#func _on_enemy_up_area_entered(area):
-	#upEnemies.push_front(area)
-#
-#
-#func _on_enemy_down_area_exited(area):
-	#downEnemies.remove_at(downEnemies.bsearch(area))
-#
-#
-#func _on_enemy_right_area_exited(area):
-	#rightEnemies.remove_at(rightEnemies.bsearch(area))
-#
-#
-#func _on_enemy_left_area_exited(area):
-	#leftEnemies.remove_at(leftEnemies.bsearch(area))
-#
-#
-#func _on_enemy_up_area_exited(area):
-	#upEnemies.remove_at(upEnemies.bsearch(area))
