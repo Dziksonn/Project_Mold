@@ -3,20 +3,20 @@ extends CharacterBody2D
 @export var speed = 400 # How fast the player will move (pixels/sec).
 @export var jump_velocity = -500
 @export var gravity = 900
-var Velocity = Vector2()
 var screen_size # Size of the game window.
 var freeze = false
 var force = "off"
 var dev_ui
 var canAttack = true
 var attackSpeed = 1 # = 1 attack per seccond
-var FacingDirection : Array
+var facingDirectionArray : Array
+var facingDirectionVector : Vector2
 
 #Nie mam pomyslu jak to lepiej zrobić niż przechowujac liste przeciwnikow w zasiegu
-var DownEnemies = Array()
-var UpEnemies = Array()
-var LeftEnemies = Array()
-var RightEnemies = Array()
+var downEnemies = Array()
+var upEnemies = Array()
+var leftEnemies = Array()
+var rightEnemies = Array()
 
 func _ready():
 	screen_size = get_viewport_rect().size
@@ -24,6 +24,7 @@ func _ready():
 	DevMenu.Ui_update()
 	DevMenu.Player_toggle_noclip.connect(_player_toggle_noclip)
 	Global.player_died.connect(_kill_player)
+	Global.player_damage.connect(_player_damage)
 
 func _process(delta):
 
@@ -36,11 +37,8 @@ func _process(delta):
 		attack = Input.is_action_just_pressed("attack")
 	}
 	if freeze:
-		controls.move_right = false;
-		controls.move_left = false;
-		controls.move_down = false;
-		controls.move_up = false;
-		controls.attack = false;
+		for key in controls:
+			controls[key] = false
 
 
 	if force != "off":
@@ -53,7 +51,7 @@ func _process(delta):
 				controls.move_down = true
 			"up":
 				controls.move_up = true
-	
+
 	if !Global.boss_fight:
 		normal_movement(controls)
 	else:
@@ -62,25 +60,30 @@ func _process(delta):
 
 	if controls.dev_menu:
 		DevMenu.Toggle()
-		
-	#Nie wiem czy nie mozna tego wruzcic do ifa z normal_movement() 
+
+	#Nie wiem czy nie mozna tego wruzcic do ifa z normal_movement()
 	#ale potrzebujemy pierwszeństwo do atakowania góra i dół bo jak idziemy po ukosie to patrzymy sie w góre lub w dół
 	if(controls.move_up):
-		FacingDirection = UpEnemies
+		facingDirectionArray = upEnemies
+		facingDirectionVector = Vector2(0, -1)
 	elif(controls.move_down):
-		FacingDirection = DownEnemies
+		facingDirectionArray = downEnemies
+		facingDirectionVector = Vector2(0, 1)
 	elif(controls.move_left):
-		FacingDirection = LeftEnemies
+		facingDirectionVector = Vector2(-1, 0)
+		facingDirectionArray = leftEnemies
 	elif(controls.move_right):
-		FacingDirection = RightEnemies
-		
+		facingDirectionVector = Vector2(1, 0)
+		facingDirectionArray = rightEnemies
+
 	if controls.attack:
 		attack()
 
 func attack():
 	if(canAttack):
-		for enemy in FacingDirection:
-			enemy.get_parent().recievedamage(10)
+		for enemy in facingDirectionArray:
+			if enemy != null:
+				enemy.get_parent().receiveDamage(10, facingDirectionVector)
 
 
 func normal_movement(controls : Dictionary):
@@ -152,33 +155,38 @@ func _player_toggle_noclip(noclip : bool):
 func _kill_player():
 	queue_free()
 
+func _player_damage(_number):
+	$Sprite2D.modulate	= Color(1, 0.4, 0.4)
+	await get_tree().create_timer(0.4).timeout
+	$Sprite2D.modulate	= Color(1, 1, 1)
+
 func _on_enemy_down_area_entered(area):
-	DownEnemies.push_front(area)
+	downEnemies.push_front(area)
 
 
 func _on_enemy_right_area_entered(area):
-	RightEnemies.push_front(area)
+	rightEnemies.push_front(area)
 
 
 func _on_enemy_left_area_entered(area):
-	LeftEnemies.push_front(area)
+	leftEnemies.push_front(area)
 
 
 func _on_enemy_up_area_entered(area):
-	UpEnemies.push_front(area)
+	upEnemies.push_front(area)
 
 
 func _on_enemy_down_area_exited(area):
-	DownEnemies.remove_at(DownEnemies.bsearch(area))
+	downEnemies.remove_at(downEnemies.bsearch(area))
 
 
 func _on_enemy_right_area_exited(area):
-	RightEnemies.remove_at(RightEnemies.bsearch(area))
+	rightEnemies.remove_at(rightEnemies.bsearch(area))
 
 
 func _on_enemy_left_area_exited(area):
-	LeftEnemies.remove_at(LeftEnemies.bsearch(area))
+	leftEnemies.remove_at(leftEnemies.bsearch(area))
 
 
 func _on_enemy_up_area_exited(area):
-	UpEnemies.remove_at(UpEnemies.bsearch(area))
+	upEnemies.remove_at(upEnemies.bsearch(area))

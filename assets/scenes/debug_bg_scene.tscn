@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://csfjlw13h66h6"]
+[gd_scene load_steps=8 format=3 uid="uid://csfjlw13h66h6"]
 
 [ext_resource type="Texture2D" uid="uid://dvjr40myqn714" path="res://assets/art/debug_bg.png" id="1_k3co1"]
 [ext_resource type="PackedScene" uid="uid://dh4s221kgtc83" path="res://assets/scenes/player.tscn" id="2_3it2h"]
 [ext_resource type="PackedScene" uid="uid://c03fj8xv24mpd" path="res://assets/scenes/player_ui.tscn" id="3_8wlmp"]
-[ext_resource type="Texture2D" uid="uid://b0thbimj1uh8j" path="res://assets/art/pizza.png" id="4_3mmxp"]
-[ext_resource type="Script" path="res://assets/scripts/Dummy.gd" id="5_0jffg"]
+[ext_resource type="PackedScene" uid="uid://bdnptnmclj4uv" path="res://assets/scenes/enemy_template.tscn" id="4_hxffb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j4vt8"]
 size = Vector2(1557, 20)
@@ -12,8 +11,11 @@ size = Vector2(1557, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_va4iq"]
 size = Vector2(24.3333, 78)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_to627"]
-size = Vector2(65, 63.5)
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_nxbjw"]
+vertices = PackedVector2Array(1029, 1174, 381, 1189, 396, 621, 1071, 610)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(387, 612, 1082, 600, 1039, 1184, 371, 1200)])
+source_geometry_group_name = &"navigation_polygon_source_group"
 
 [node name="boss_scene" type="Node2D"]
 
@@ -21,6 +23,7 @@ size = Vector2(65, 63.5)
 position = Vector2(1446, 641)
 scale = Vector2(2, 2)
 texture = ExtResource("1_k3co1")
+metadata/_edit_lock_ = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="DebugBg"]
 position = Vector2(-723, -320.5)
@@ -35,8 +38,6 @@ shape = SubResource("RectangleShape2D_j4vt8")
 [node name="Player" parent="." instance=ExtResource("2_3it2h")]
 z_index = 2
 position = Vector2(109, 1110)
-collision_mask = 14
-metadata/_edit_group_ = true
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 limit_left = 20
@@ -57,24 +58,18 @@ debug_color = Color(0, 0, 0, 0.419608)
 
 [node name="player_ui" parent="." instance=ExtResource("3_8wlmp")]
 
-[node name="Dummy" type="Sprite2D" parent="."]
-position = Vector2(636, 900)
-scale = Vector2(2, 2)
-texture = ExtResource("4_3mmxp")
-script = ExtResource("5_0jffg")
+[node name="Dummy" parent="." instance=ExtResource("4_hxffb")]
+position = Vector2(612, 898)
+speed = 200
+damage = 5
 
-[node name="Hitbox" type="Area2D" parent="Dummy"]
-collision_layer = 8
-collision_mask = 8
+[node name="Dummy2" parent="." instance=ExtResource("4_hxffb")]
+position = Vector2(855, 899)
+speed = 200
+damage = 5
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Dummy/Hitbox"]
-position = Vector2(0, 1.25)
-shape = SubResource("RectangleShape2D_to627")
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_nxbjw")
+navigation_layers = 9
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="Dummy"]
-collision_layer = 8
-collision_mask = 9
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Dummy/CharacterBody2D"]
-position = Vector2(0, 1.25)
-shape = SubResource("RectangleShape2D_to627")
+[editable path="Dummy2"]

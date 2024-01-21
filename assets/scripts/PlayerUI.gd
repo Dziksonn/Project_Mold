@@ -1,6 +1,8 @@
 extends CanvasLayer
 
-var store_hp = 50
+var Store_hp = 50
+var Store_enemies = 0
+var Store_coins = 0
 
 func _ready():
 	pass
@@ -14,4 +16,6 @@ func set_hud_visible(status : bool):
 
 
 func refresh():
-	$TextureProgressBar.value = store_hp
+	$TextureProgressBar.value = Store_hp
+	$enemy_kills/RichTextLabel.set_text(str(Store_enemies))
+	$money/RichTextLabel.set_text(str(Store_coins))

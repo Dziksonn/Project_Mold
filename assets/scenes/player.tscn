@@ -163,14 +163,16 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qgisa"]
-size = Vector2(20.3333, 79.6667)
+size = Vector2(22.6667, 80)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dsr0b"]
-size = Vector2(46.6667, 39.3333)
+size = Vector2(44.5833, 47)
 
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(3, 3)
+collision_mask = 6
 script = ExtResource("1_216rl")
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_gif0e")
@@ -190,8 +192,7 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(-1.83333, 1.5)
+position = Vector2(3.57628e-07, 1)
 shape = SubResource("RectangleShape2D_qgisa")
 
 [node name="AttackAreas" type="Node2D" parent="."]
@@ -201,7 +202,7 @@ collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackAreas/Down"]
-position = Vector2(0, 35.3333)
+position = Vector2(0, 22.3333)
 shape = SubResource("RectangleShape2D_dsr0b")
 debug_color = Color(0.992157, 0.0862745, 0, 0.0784314)
 
@@ -211,7 +212,7 @@ collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackAreas/Right"]
-position = Vector2(0, 35.3333)
+position = Vector2(-12.3333, 37.6666)
 shape = SubResource("RectangleShape2D_dsr0b")
 debug_color = Color(0.992157, 0.0862745, 0, 0.0784314)
 
@@ -221,7 +222,7 @@ collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackAreas/Left"]
-position = Vector2(0, 35.3333)
+position = Vector2(12.3334, 37.6666)
 shape = SubResource("RectangleShape2D_dsr0b")
 debug_color = Color(0.992157, 0.0862745, 0, 0.0784314)
 
@@ -231,7 +232,7 @@ collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackAreas/Up"]
-position = Vector2(0, 35.3333)
+position = Vector2(-0.333333, 45.6666)
 shape = SubResource("RectangleShape2D_dsr0b")
 debug_color = Color(0.992157, 0.0862745, 0, 0.0784314)
 
