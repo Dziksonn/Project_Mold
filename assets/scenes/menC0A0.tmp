@@ -1,0 +1,147 @@
+[gd_scene load_steps=13 format=3 uid="uid://brwg7duxb6wkr"]
+
+[ext_resource type="PackedScene" uid="uid://dh4s221kgtc83" path="res://assets/scenes/player.tscn" id="1_ir8m2"]
+[ext_resource type="Script" path="res://assets/scripts/menu.gd" id="1_sex5s"]
+[ext_resource type="Texture2D" uid="uid://uiaasl1heqvd" path="res://assets/art/menu_buttons.png" id="2_3jw7g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xxo65"]
+size = Vector2(24.3333, 78)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5y8pl"]
+size = Vector2(1404, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oybuf"]
+size = Vector2(31, 994.75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w5g72"]
+size = Vector2(176, 379)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gbcf7"]
+size = Vector2(150, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bnvs8"]
+size = Vector2(241, 378)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n0t38"]
+size = Vector2(215, 67.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k0br8"]
+size = Vector2(132, 375)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bpgxl"]
+size = Vector2(109, 63)
+
+[node name="menu" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_ir8m2")]
+position = Vector2(48, 586)
+
+[node name="PlayerDetector" type="Area2D" parent="Player"]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/PlayerDetector"]
+position = Vector2(0.166667, -0.333333)
+shape = SubResource("RectangleShape2D_xxo65")
+debug_color = Color(0, 0, 0, 0.419608)
+
+[node name="floor" type="StaticBody2D" parent="."]
+collision_layer = 2
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="floor"]
+position = Vector2(647, 729)
+shape = SubResource("RectangleShape2D_5y8pl")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="floor"]
+position = Vector2(-15.5, 475.375)
+shape = SubResource("RectangleShape2D_oybuf")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="floor"]
+position = Vector2(1287, 345.75)
+shape = SubResource("RectangleShape2D_oybuf")
+
+[node name="buttons" type="Node2D" parent="."]
+
+[node name="start_button" type="Area2D" parent="buttons"]
+position = Vector2(-51, -14)
+collision_layer = 4
+script = ExtResource("1_sex5s")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="buttons/start_button"]
+position = Vector2(482, 386)
+scale = Vector2(3, 3)
+texture = ExtResource("2_3jw7g")
+hframes = 2
+vframes = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="buttons/start_button"]
+position = Vector2(482, 537.5)
+shape = SubResource("RectangleShape2D_w5g72")
+
+[node name="start_trigger" type="Area2D" parent="buttons/start_button"]
+position = Vector2(51, 14)
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="buttons/start_button/start_trigger"]
+position = Vector2(433, 377)
+shape = SubResource("RectangleShape2D_gbcf7")
+debug_color = Color(0.176471, 0.643137, 0, 0.419608)
+
+[node name="options_button" type="Area2D" parent="buttons"]
+position = Vector2(-64, -14)
+collision_layer = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="buttons/options_button"]
+position = Vector2(721, 386)
+scale = Vector2(3, 3)
+texture = ExtResource("2_3jw7g")
+hframes = 2
+vframes = 3
+frame = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="buttons/options_button"]
+position = Vector2(720.5, 535)
+shape = SubResource("RectangleShape2D_bnvs8")
+
+[node name="options_trigger" type="Area2D" parent="buttons/options_button"]
+position = Vector2(51, 14)
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="buttons/options_button/options_trigger"]
+position = Vector2(670.5, 376.375)
+shape = SubResource("RectangleShape2D_n0t38")
+debug_color = Color(0.529412, 0.572549, 0, 0.419608)
+
+[node name="exit_button" type="Area2D" parent="buttons"]
+position = Vector2(202, -14)
+collision_layer = 4
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="buttons/exit_button"]
+position = Vector2(661, 386)
+scale = Vector2(3, 3)
+texture = ExtResource("2_3jw7g")
+hframes = 2
+vframes = 3
+frame = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="buttons/exit_button"]
+position = Vector2(661, 535.5)
+shape = SubResource("RectangleShape2D_k0br8")
+
+[node name="exit_trigger" type="Area2D" parent="buttons/exit_button"]
+position = Vector2(51, 14)
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="buttons/exit_button/exit_trigger"]
+position = Vector2(610.5, 377.5)
+shape = SubResource("RectangleShape2D_bpgxl")
+debug_color = Color(1, 0.0117647, 0.0156863, 0.419608)
+
+[connection signal="area_entered" from="Player/PlayerDetector" to="buttons/start_button" method="_on_player_detector_area_entered"]
+[connection signal="area_entered" from="Player/PlayerDetector" to="buttons/options_button" method="_on_player_detector_area_entered"]
+[connection signal="area_entered" from="Player/PlayerDetector" to="buttons/exit_button" method="_on_player_detector_area_entered"]
+[connection signal="area_exited" from="Player/PlayerDetector" to="buttons/start_button" method="_on_player_detector_area_exited"]
+[connection signal="area_exited" from="Player/PlayerDetector" to="buttons/options_button" method="_on_player_detector_area_exited"]
+[connection signal="area_exited" from="Player/PlayerDetector" to="buttons/exit_button" method="_on_player_detector_area_exited"]

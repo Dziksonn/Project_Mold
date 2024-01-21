@@ -27,12 +27,16 @@ func receiveDamage(amount, knock_direction : Vector2):
 	health -= amount
 	$HealthBar.value = health
 	knockback(knock_direction)
+	
+	$Dummy.modulate	= Color(1, 0.4, 0.4)
 	if health <= 0:
 		$AnimationPlayer.play('ded')
 		await $AnimationPlayer.animation_finished
 		queue_free()
 		Global.enemy_killed.emit()
 		Global.coins_earned.emit(20)
+	await get_tree().create_timer(0.2).timeout
+	$Dummy.modulate	= Color(1, 1, 1)
 
 func knockback(knok_direction):
 	knock_direction_physics = knok_direction

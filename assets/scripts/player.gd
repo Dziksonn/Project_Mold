@@ -9,8 +9,10 @@ var force = "off"
 var dev_ui
 var canAttack = true
 var attackSpeed = 1 # = 1 attack per seccond
+var projectileSpeed = 1500
 var facingDirectionVector : Vector2
 var cooldown = 0
+var alt_cooldown = 0
 var gamepad = false
 var gamepad_countdown = 0
 
@@ -25,18 +27,19 @@ func _ready():
 
 func _process(delta):
 	cooldown -= delta
-
+	alt_cooldown -= delta
 	var controls = {
 		move_right = Input.is_action_pressed("move_right"),
 		move_left = Input.is_action_pressed("move_left"),
 		move_down = Input.is_action_pressed("move_down"),
 		move_up = Input.is_action_pressed("move_up"),
 		dev_menu = Input.is_action_just_pressed("dev_menu"),
-		attack = Input.is_action_just_pressed("attack")
+		attack = Input.is_action_just_pressed("attack"),
+		alt_attack = Input.is_action_just_pressed("attack_alt")
 	}
 	var controls_gamepad = {
-    	direction_y = Input.get_action_strength("look_y_plus") - Input.get_action_strength("look_y_minus"),
-    	direction_x = Input.get_action_strength("look_x_plus") - Input.get_action_strength("look_x_minus"),
+		direction_y = Input.get_action_strength("look_y_plus") - Input.get_action_strength("look_y_minus"),
+		direction_x = Input.get_action_strength("look_x_plus") - Input.get_action_strength("look_x_minus"),
 	}
 	if freeze:
 		for key in controls:
@@ -90,7 +93,17 @@ func _process(delta):
 	if(controls.attack):
 		if cooldown <= 0:
 			attack()
-
+	if(controls.alt_attack):
+		if alt_cooldown <=0:
+			alt_attack()
+		
+func alt_attack():
+	alt_cooldown = 2
+	var knife = preload("res://assets/scenes/knifeProjectile.tscn").instantiate()
+	knife.position = self.position
+	knife.apply_impulse(Vector2.RIGHT.rotated($Sprite2D/KnifeSprite.rotation)*projectileSpeed)
+	knife.rotation = $Sprite2D/KnifeSprite.rotation
+	get_tree().get_root().get_node(".").add_child(knife)
 func attack():
 	cooldown = 1 / attackSpeed
 	$Sprite2D/KnifeSprite.visible = true
