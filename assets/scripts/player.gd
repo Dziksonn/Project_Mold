@@ -10,6 +10,9 @@ var dev_ui
 var canAttack = true
 var attackSpeed = 1 # = 1 attack per seccond
 var facingDirectionVector : Vector2
+var cooldown = 0
+var gamepad = false
+var gamepad_countdown = 0
 
 
 func _ready():
@@ -21,6 +24,7 @@ func _ready():
 	Global.player_damage.connect(_player_damage)
 
 func _process(delta):
+	cooldown -= delta
 
 	var controls = {
 		move_right = Input.is_action_pressed("move_right"),
@@ -29,6 +33,10 @@ func _process(delta):
 		move_up = Input.is_action_pressed("move_up"),
 		dev_menu = Input.is_action_just_pressed("dev_menu"),
 		attack = Input.is_action_just_pressed("attack")
+	}
+	var controls_gamepad = {
+    	direction_y = Input.get_action_strength("look_y_plus") - Input.get_action_strength("look_y_minus"),
+    	direction_x = Input.get_action_strength("look_x_plus") - Input.get_action_strength("look_x_minus"),
 	}
 	if freeze:
 		for key in controls:
@@ -55,8 +63,20 @@ func _process(delta):
 	if controls.dev_menu:
 		DevMenu.Toggle()
 
-	$Sprite2D/KnifeSprite.look_at(get_global_mouse_position())
-	
+	if controls_gamepad.direction_y != 0 or controls_gamepad.direction_x != 0:
+		gamepad = true
+		gamepad_countdown = 10
+
+	if gamepad_countdown > 0:
+		gamepad_countdown -= delta
+	else:
+		gamepad = false
+
+	if gamepad == true:
+		$Sprite2D/KnifeSprite.look_at(self.position + Vector2(controls_gamepad.direction_x * 100, controls_gamepad.direction_y * 100))
+	else:
+		$Sprite2D/KnifeSprite.look_at(get_global_mouse_position())
+
 	#Nie wiem czy nie mozna tego wruzcic do ifa z normal_movement()
 	#ale potrzebujemy pierwszeństwo do atakowania góra i dół bo jak idziemy po ukosie to patrzymy sie w góre lub w dół
 	if(controls.move_up):
@@ -68,18 +88,22 @@ func _process(delta):
 	elif(controls.move_right):
 		facingDirectionVector = Vector2(1, 0)
 	if(controls.attack):
-		attack()
+		if cooldown <= 0:
+			attack()
 
 func attack():
+	cooldown = 1 / attackSpeed
+	$Sprite2D/KnifeSprite.visible = true
 	$Sprite2D/KnifeAnimation.play("attack")
 	await $Sprite2D/KnifeAnimation.animation_finished
-	
+
 	for enemy in $Sprite2D/KnifeSprite/Area2D.get_overlapping_areas():
 		var knockbackVector = Vector2.RIGHT.rotated($Sprite2D/KnifeSprite.rotation)
 		enemy.get_parent().receiveDamage(10,knockbackVector)
-	
+
 	$Sprite2D/KnifeAnimation.play_backwards("attack")
-	pass
+	await $Sprite2D/KnifeAnimation.animation_finished
+	$Sprite2D/KnifeSprite.visible = false
 
 
 func normal_movement(controls : Dictionary):
@@ -88,7 +112,7 @@ func normal_movement(controls : Dictionary):
 		velocity.x += 1
 		if !controls.move_down and !controls.move_up:
 			$Sprite2D/AnimationPlayer.play("walk_right")
-			
+
 	if controls.move_left:
 		velocity.x -= 1
 		if !controls.move_down and !controls.move_up:
