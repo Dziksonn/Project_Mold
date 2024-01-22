@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://dh4s221kgtc83"]
+[gd_scene load_steps=19 format=3 uid="uid://dh4s221kgtc83"]
 
 [ext_resource type="Script" path="res://assets/scripts/player.gd" id="1_216rl"]
 [ext_resource type="Texture2D" uid="uid://wo22c5ole6cp" path="res://assets/art/player.png" id="2_gif0e"]
 [ext_resource type="Texture2D" uid="uid://o4g7ubtw4yc2" path="res://assets/art/Knife-temp.png" id="3_g6c5f"]
+[ext_resource type="Texture2D" uid="uid://conisvovf8k6i" path="res://assets/art/Circle.png" id="4_6wl06"]
 
 [sub_resource type="Animation" id="Animation_1x17l"]
 length = 0.001
@@ -331,3 +332,23 @@ libraries = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(3.57628e-07, 1)
 shape = SubResource("RectangleShape2D_qgisa")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Control"]
+offset_left = 16.3333
+offset_top = -35.6667
+offset_right = 144.333
+offset_bottom = 92.3333
+scale = Vector2(0.137, 0.137)
+max_value = 2.0
+step = 0.01
+value = 2.0
+allow_greater = true
+allow_lesser = true
+fill_mode = 5
+texture_progress = ExtResource("4_6wl06")

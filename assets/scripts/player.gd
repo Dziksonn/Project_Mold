@@ -28,6 +28,7 @@ func _ready():
 func _process(delta):
 	cooldown -= delta
 	alt_cooldown -= delta
+	$Control/TextureProgressBar.value = alt_cooldown
 	var controls = {
 		move_right = Input.is_action_pressed("move_right"),
 		move_left = Input.is_action_pressed("move_left"),
@@ -99,6 +100,7 @@ func _process(delta):
 		
 func alt_attack():
 	alt_cooldown = 2
+	$Control/TextureProgressBar.value=alt_cooldown
 	var knife = preload("res://assets/scenes/knifeProjectile.tscn").instantiate()
 	knife.position = self.position
 	knife.apply_impulse(Vector2.RIGHT.rotated($Sprite2D/KnifeSprite.rotation)*projectileSpeed)

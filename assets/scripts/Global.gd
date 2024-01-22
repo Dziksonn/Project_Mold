@@ -6,7 +6,7 @@ signal player_died
 signal enemy_killed()
 signal coins_earned(number)
 
-var Player_temp_data : Dictionary = {"hp" = 500, "max_hp" = 100, "is_dead" = false, "enemy_kills_per_run" = 0}
+var Player_temp_data : Dictionary = {"hp" = 500, "max_hp" = 100, "is_dead" = false, "enemy_kills_per_run" = 0,"powerups" = []}
 var Player_data : Dictionary = {"coins" = 0, "enemy_kills" = 0}
 var actual_scene : String
 var boss_fight : bool = false
