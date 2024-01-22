@@ -148,6 +148,7 @@ attack_alt={
 2d_physics/layer_2="Sciany"
 2d_physics/layer_3="Drzwi"
 2d_physics/layer_4="Przeciwnicy"
+2d_physics/layer_5="Dropped_items"
 
 [rendering]
 

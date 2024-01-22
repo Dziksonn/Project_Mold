@@ -4,12 +4,6 @@ var Store_hp = 50
 var Store_enemies = 0
 var Store_coins = 0
 
-func _ready():
-	pass
-
-func _process(_delta):
-	pass
-
 
 func set_hud_visible(status : bool):
 	self.visible = status

@@ -5,7 +5,12 @@ signal player_damage(number)
 signal player_died
 signal enemy_killed()
 signal coins_earned(number)
+signal add_item(Item)
 
+
+
+var Player_Items:Array[Item]
+var Player_bonuses:Dictionary={}
 var Player_temp_data : Dictionary = {"hp" = 500, "max_hp" = 100, "is_dead" = false, "enemy_kills_per_run" = 0,"powerups" = []}
 var Player_data : Dictionary = {"coins" = 0, "enemy_kills" = 0}
 var actual_scene : String
@@ -68,7 +73,11 @@ func _ready():
 	player_damage.connect(_damage_player)
 	enemy_killed.connect(_enemy_killed)
 	coins_earned.connect(_coins_earned)
+	add_item.connect(_add_item)
 	pass
 
 func _process(_delta):
 	refresh_hud()
+
+func _add_item(item:Item):
+	print(item.name)

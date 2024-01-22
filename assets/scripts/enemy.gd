@@ -7,6 +7,8 @@ var health = max_health
 @export var accel = 7
 @export var attack_player = false
 @export var damage = 1
+@export var ItemToDrop:Item
+var rng = RandomNumberGenerator.new()
 
 @onready var nav : NavigationAgent2D = $NavigationAgent2D
 @onready var player : CharacterBody2D = owner.get_node("Player")
@@ -30,13 +32,22 @@ func receiveDamage(amount, knock_direction : Vector2):
 	
 	$Dummy.modulate	= Color(1, 0.4, 0.4)
 	if health <= 0:
-		$AnimationPlayer.play('ded')
-		await $AnimationPlayer.animation_finished
-		queue_free()
-		Global.enemy_killed.emit()
-		Global.coins_earned.emit(20)
+		die()
 	await get_tree().create_timer(0.2).timeout
 	$Dummy.modulate	= Color(1, 1, 1)
+
+func die():
+	if(1==1):
+		var ItemDropObject = preload("res://assets/scenes/dropped_item.tscn").instantiate()
+		ItemDropObject.position = self.position
+		ItemDropObject.get_child(0).texture = ItemToDrop.texture
+		ItemDropObject.itemToAdd = ItemToDrop
+		get_tree().get_root().get_node(".").add_child(ItemDropObject)
+	$AnimationPlayer.play('ded')
+	await $AnimationPlayer.animation_finished
+	queue_free()
+	Global.enemy_killed.emit()
+	Global.coins_earned.emit(20)
 
 func knockback(knok_direction):
 	knock_direction_physics = knok_direction

@@ -1,10 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://csfjlw13h66h6"]
+[gd_scene load_steps=9 format=3 uid="uid://csfjlw13h66h6"]
 
 [ext_resource type="Texture2D" uid="uid://dvjr40myqn714" path="res://assets/art/debug_bg.png" id="1_k3co1"]
 [ext_resource type="PackedScene" uid="uid://dh4s221kgtc83" path="res://assets/scenes/player.tscn" id="2_3it2h"]
 [ext_resource type="PackedScene" uid="uid://c03fj8xv24mpd" path="res://assets/scenes/player_ui.tscn" id="3_8wlmp"]
 [ext_resource type="PackedScene" uid="uid://bdnptnmclj4uv" path="res://assets/scenes/enemy_template.tscn" id="4_hxffb"]
-[ext_resource type="Resource" uid="uid://chi7gi2gfir2w" path="res://assets/Items/TestItem.tres" id="5_11ng8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j4vt8"]
 size = Vector2(1557, 20)
@@ -70,13 +69,11 @@ debug_color = Color(0, 0, 0, 0.419608)
 position = Vector2(612, 898)
 speed = 200
 damage = 5
-ItemToDrop = ExtResource("5_11ng8")
 
 [node name="Dummy2" parent="." instance=ExtResource("4_hxffb")]
 position = Vector2(855, 899)
 speed = 200
 damage = 5
-ItemToDrop = ExtResource("5_11ng8")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 position = Vector2(58, -159)

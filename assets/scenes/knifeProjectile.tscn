@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://donj8y51qlkaw"]
 
-[ext_resource type="Script" path="res://assets/scenes/projectile.gd" id="1_prbxr"]
+[ext_resource type="Script" path="res://assets/scripts/projectile.gd" id="1_j11un"]
 [ext_resource type="Texture2D" uid="uid://o4g7ubtw4yc2" path="res://assets/art/Knife-temp.png" id="2_xrrbs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6l0gd"]
@@ -9,7 +9,7 @@ size = Vector2(34, 15)
 [node name="RigidBody2D" type="RigidBody2D"]
 collision_layer = 0
 collision_mask = 2
-script = ExtResource("1_prbxr")
+script = ExtResource("1_j11un")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)

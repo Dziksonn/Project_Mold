@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://chi7gi2gfir2w"]
+
+[ext_resource type="Script" path="res://assets/scripts/Item.gd" id="1_g6g4r"]
+[ext_resource type="Texture2D" uid="uid://o4g7ubtw4yc2" path="res://assets/art/Knife-temp.png" id="2_3ou6d"]
+
+[resource]
+script = ExtResource("1_g6g4r")
+name = "asd"
+basePrice = 1
+statUpgrades = {}
+texture = ExtResource("2_3ou6d")

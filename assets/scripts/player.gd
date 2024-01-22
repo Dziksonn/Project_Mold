@@ -99,14 +99,19 @@ func _process(delta):
 			alt_attack()
 		
 func alt_attack():
-	alt_cooldown = 2
+	if(!canAttack):
+		return
+	alt_cooldown = 2 / attackSpeed
 	$Control/TextureProgressBar.value=alt_cooldown
 	var knife = preload("res://assets/scenes/knifeProjectile.tscn").instantiate()
 	knife.position = self.position
 	knife.apply_impulse(Vector2.RIGHT.rotated($Sprite2D/KnifeSprite.rotation)*projectileSpeed)
 	knife.rotation = $Sprite2D/KnifeSprite.rotation
 	get_tree().get_root().get_node(".").add_child(knife)
+	
 func attack():
+	if(!canAttack):
+		return
 	cooldown = 1 / attackSpeed
 	$Sprite2D/KnifeSprite.visible = true
 	$Sprite2D/KnifeAnimation.play("attack")
@@ -114,7 +119,7 @@ func attack():
 
 	for enemy in $Sprite2D/KnifeSprite/Area2D.get_overlapping_areas():
 		var knockbackVector = Vector2.RIGHT.rotated($Sprite2D/KnifeSprite.rotation)
-		enemy.get_parent().receiveDamage(10,knockbackVector)
+		enemy.get_parent().receiveDamage(50,knockbackVector)
 
 	$Sprite2D/KnifeAnimation.play_backwards("attack")
 	await $Sprite2D/KnifeAnimation.animation_finished
@@ -196,3 +201,17 @@ func _player_damage(_number):
 	$Sprite2D.modulate	= Color(1, 0.4, 0.4)
 	await get_tree().create_timer(0.4).timeout
 	$Sprite2D.modulate	= Color(1, 1, 1)
+
+
+func _on_item_pickup_area_entered(area):
+	var itemToAdd:Item = area.get_parent().itemToAdd
+	print(itemToAdd.name)
+	area.get_parent().queue_free()
+
+func _on_item_magnet_area_entered(area):
+	area.get_parent().isMagnetized = true
+	area.get_parent().objectToLookAt = self
+
+
+func _on_item_magnet_area_exited(area):
+	area.get_parent().isMagnetized = false
