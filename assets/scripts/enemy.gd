@@ -7,7 +7,7 @@ var health = max_health
 @export var accel = 7
 @export var attack_player = false
 @export var damage = 1
-@export var ItemToDrop:Item
+
 var rng = RandomNumberGenerator.new()
 
 @onready var nav : NavigationAgent2D = $NavigationAgent2D
@@ -37,7 +37,9 @@ func receiveDamage(amount, knock_direction : Vector2):
 	$Dummy.modulate	= Color(1, 1, 1)
 
 func die():
-	if(1==1):
+	if(rng.randf_range(0,100) >= 60):
+		var size = Global.All_items.size()-1
+		var ItemToDrop = Global.All_items[rng.randi_range(0,size)]
 		var ItemDropObject = preload("res://assets/scenes/dropped_item.tscn").instantiate()
 		ItemDropObject.position = self.position
 		ItemDropObject.get_child(0).texture = ItemToDrop.texture

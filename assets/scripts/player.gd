@@ -1,8 +1,9 @@
 extends CharacterBody2D
 
-@export var speed = 400 # How fast the player will move (pixels/sec).
 @export var jump_velocity = -500
 @export var gravity = 900
+
+var speed = 400 # How fast the player will move (pixels/sec).
 var screen_size # Size of the game window.
 var freeze = false
 var force = "off"
@@ -16,6 +17,7 @@ var alt_cooldown = 0
 var gamepad = false
 var gamepad_countdown = 0
 
+var rng = RandomNumberGenerator.new()
 
 func _ready():
 	screen_size = get_viewport_rect().size
@@ -24,7 +26,9 @@ func _ready():
 	DevMenu.Player_toggle_noclip.connect(_player_toggle_noclip)
 	Global.player_died.connect(_kill_player)
 	Global.player_damage.connect(_player_damage)
-
+	Global.refresh_stats.connect(_refreshStats)
+	_refreshStats()
+	
 func _process(delta):
 	cooldown -= delta
 	alt_cooldown -= delta
@@ -45,7 +49,6 @@ func _process(delta):
 	if freeze:
 		for key in controls:
 			controls[key] = false
-
 
 	if force != "off":
 		match(force):
@@ -78,36 +81,42 @@ func _process(delta):
 
 	if gamepad == true:
 		$Sprite2D/KnifeSprite.look_at(self.position + Vector2(controls_gamepad.direction_x * 100, controls_gamepad.direction_y * 100))
+		$Sprite2D/ArrowSprite.look_at(self.position + Vector2(controls_gamepad.direction_x * 100, controls_gamepad.direction_y * 100))
 	else:
 		$Sprite2D/KnifeSprite.look_at(get_global_mouse_position())
-
-	#Nie wiem czy nie mozna tego wruzcic do ifa z normal_movement()
-	#ale potrzebujemy pierwszeństwo do atakowania góra i dół bo jak idziemy po ukosie to patrzymy sie w góre lub w dół
-	if(controls.move_up):
-		facingDirectionVector = Vector2(0, -1)
-	elif(controls.move_down):
-		facingDirectionVector = Vector2(0, 1)
-	elif(controls.move_left):
-		facingDirectionVector = Vector2(-1, 0)
-	elif(controls.move_right):
-		facingDirectionVector = Vector2(1, 0)
+		$Sprite2D/ArrowSprite.look_at(get_global_mouse_position())
+		
 	if(controls.attack):
 		if cooldown <= 0:
 			attack()
 	if(controls.alt_attack):
 		if alt_cooldown <=0:
 			alt_attack()
-		
+
+func shoot_knife(_direction):
+	var knife = preload("res://assets/scenes/knifeProjectile.tscn").instantiate()
+	knife.position = self.position
+	knife.apply_impulse(Vector2.RIGHT.rotated($Sprite2D/KnifeSprite.rotation+_direction)*projectileSpeed)
+	knife.rotation = $Sprite2D/KnifeSprite.rotation+_direction
+	get_tree().get_root().get_node(".").add_child(knife)
 func alt_attack():
 	if(!canAttack):
 		return
-	alt_cooldown = 2 / attackSpeed
+	alt_cooldown = 1 / ((attackSpeed)*2 -1) * 2
 	$Control/TextureProgressBar.value=alt_cooldown
-	var knife = preload("res://assets/scenes/knifeProjectile.tscn").instantiate()
-	knife.position = self.position
-	knife.apply_impulse(Vector2.RIGHT.rotated($Sprite2D/KnifeSprite.rotation)*projectileSpeed)
-	knife.rotation = $Sprite2D/KnifeSprite.rotation
-	get_tree().get_root().get_node(".").add_child(knife)
+	match Global.Player_temp_data["powerups"]["multishot"]:
+		1:
+			shoot_knife(0)
+		3:
+			shoot_knife(-PI/12)
+			shoot_knife(0)
+			shoot_knife(PI/12)
+		5:
+			shoot_knife(-PI/6)
+			shoot_knife(-PI/12)
+			shoot_knife(0)
+			shoot_knife(PI/12)
+			shoot_knife(PI/6)
 	
 func attack():
 	if(!canAttack):
@@ -119,7 +128,9 @@ func attack():
 
 	for enemy in $Sprite2D/KnifeSprite/Area2D.get_overlapping_areas():
 		var knockbackVector = Vector2.RIGHT.rotated($Sprite2D/KnifeSprite.rotation)
-		enemy.get_parent().receiveDamage(50,knockbackVector)
+		var attackpower = Global.Player_temp_data["attack_power"]
+		var Damage = rng.randi_range(attackpower-5,attackpower+5)
+		enemy.get_parent().receiveDamage(Damage,knockbackVector)
 
 	$Sprite2D/KnifeAnimation.play_backwards("attack")
 	await $Sprite2D/KnifeAnimation.animation_finished
@@ -169,7 +180,6 @@ func boss_movement(controls : Dictionary, delta):
 		velocity.x = move_toward(velocity.x, 0, speed)
 		$Sprite2D/AnimationPlayer.stop()
 
-
 func _physics_process(_delta):
 	move_and_slide()
 
@@ -202,16 +212,18 @@ func _player_damage(_number):
 	await get_tree().create_timer(0.4).timeout
 	$Sprite2D.modulate	= Color(1, 1, 1)
 
-
 func _on_item_pickup_area_entered(area):
 	var itemToAdd:Item = area.get_parent().itemToAdd
-	print(itemToAdd.name)
+	Global.add_item.emit(itemToAdd)
 	area.get_parent().queue_free()
 
 func _on_item_magnet_area_entered(area):
 	area.get_parent().isMagnetized = true
 	area.get_parent().objectToLookAt = self
 
-
 func _on_item_magnet_area_exited(area):
 	area.get_parent().isMagnetized = false
+
+func _refreshStats():
+	attackSpeed = Global.Player_temp_data["attack_speed"]
+	speed = Global.Player_temp_data["movement_speed"]

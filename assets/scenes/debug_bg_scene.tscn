@@ -1,10 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://csfjlw13h66h6"]
+[gd_scene load_steps=9 format=3 uid="uid://csfjlw13h66h6"]
 
 [ext_resource type="Texture2D" uid="uid://dvjr40myqn714" path="res://assets/art/debug_bg.png" id="1_k3co1"]
 [ext_resource type="PackedScene" uid="uid://dh4s221kgtc83" path="res://assets/scenes/player.tscn" id="2_3it2h"]
 [ext_resource type="PackedScene" uid="uid://c03fj8xv24mpd" path="res://assets/scenes/player_ui.tscn" id="3_8wlmp"]
 [ext_resource type="PackedScene" uid="uid://bdnptnmclj4uv" path="res://assets/scenes/enemy_template.tscn" id="4_hxffb"]
-[ext_resource type="Resource" uid="uid://chi7gi2gfir2w" path="res://assets/Items/TestItem.tres" id="5_11ng8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j4vt8"]
 size = Vector2(1557, 20)
@@ -16,9 +15,9 @@ size = Vector2(34, 1308)
 size = Vector2(24.3333, 78)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_nxbjw"]
-vertices = PackedVector2Array(1306, 435, 1162, 1190, 381, 1190, 356, 431)
+vertices = PackedVector2Array(3162, 201, 3137, 1405, 309, 1410, 312, 199)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(346, 421, 1319, 426, 1170, 1200, 371, 1200)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(303, 189, 3173, 192, 3147, 1415, 299, 1421)])
 source_geometry_group_name = &"navigation_polygon_source_group"
 
 [node name="boss_scene" type="Node2D"]
@@ -67,20 +66,94 @@ debug_color = Color(0, 0, 0, 0.419608)
 [node name="player_ui" parent="." instance=ExtResource("3_8wlmp")]
 
 [node name="Dummy" parent="." instance=ExtResource("4_hxffb")]
-position = Vector2(612, 898)
+position = Vector2(2156, 768)
 speed = 200
 damage = 5
-ItemToDrop = ExtResource("5_11ng8")
 
 [node name="Dummy2" parent="." instance=ExtResource("4_hxffb")]
-position = Vector2(855, 899)
+position = Vector2(2399, 769)
 speed = 200
 damage = 5
-ItemToDrop = ExtResource("5_11ng8")
+
+[node name="Dummy3" parent="." instance=ExtResource("4_hxffb")]
+position = Vector2(2399, 452)
+speed = 200
+damage = 5
+
+[node name="Dummy4" parent="." instance=ExtResource("4_hxffb")]
+position = Vector2(2583, 769)
+speed = 200
+damage = 5
+
+[node name="Dummy5" parent="." instance=ExtResource("4_hxffb")]
+position = Vector2(2399, 612)
+speed = 200
+damage = 5
+
+[node name="Dummy6" parent="." instance=ExtResource("4_hxffb")]
+position = Vector2(1726, 935)
+speed = 200
+damage = 5
+
+[node name="Dummy7" parent="." instance=ExtResource("4_hxffb")]
+position = Vector2(1969, 936)
+speed = 200
+damage = 5
+
+[node name="Dummy8" parent="." instance=ExtResource("4_hxffb")]
+position = Vector2(1969, 619)
+speed = 200
+damage = 5
+
+[node name="Dummy9" parent="." instance=ExtResource("4_hxffb")]
+position = Vector2(2153, 936)
+speed = 200
+damage = 5
+
+[node name="Dummy10" parent="." instance=ExtResource("4_hxffb")]
+position = Vector2(1969, 779)
+speed = 200
+damage = 5
+
+[node name="Dummy11" parent="." instance=ExtResource("4_hxffb")]
+position = Vector2(1355, 776)
+speed = 200
+damage = 5
+
+[node name="Dummy12" parent="." instance=ExtResource("4_hxffb")]
+position = Vector2(1598, 777)
+speed = 200
+damage = 5
+
+[node name="Dummy13" parent="." instance=ExtResource("4_hxffb")]
+position = Vector2(1598, 460)
+speed = 200
+damage = 5
+
+[node name="Dummy14" parent="." instance=ExtResource("4_hxffb")]
+position = Vector2(1782, 777)
+speed = 200
+damage = 5
+
+[node name="Dummy15" parent="." instance=ExtResource("4_hxffb")]
+position = Vector2(1598, 620)
+speed = 200
+damage = 5
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-position = Vector2(58, -159)
+position = Vector2(-40, -171)
 navigation_polygon = SubResource("NavigationPolygon_nxbjw")
 navigation_layers = 9
 
 [editable path="Dummy2"]
+[editable path="Dummy3"]
+[editable path="Dummy4"]
+[editable path="Dummy5"]
+[editable path="Dummy7"]
+[editable path="Dummy8"]
+[editable path="Dummy9"]
+[editable path="Dummy10"]
+[editable path="Dummy12"]
+[editable path="Dummy13"]
+[editable path="Dummy14"]
+[editable path="Dummy15"]

@@ -26,10 +26,23 @@ func Ui_update():
 		[b]B[/b]oss Mode: {status}\n
 		[b]L[/b]obby teleport\n
 		[b]N[/b]oclip\n
-		[b]Up[/b] Heal
-		[b]Down[/b] Damage
+		[b]Up[/b] Heal\n
+		[b]Down[/b] Damage\n
+		[b]Health[/b] {hp}/{maxHealth}\n
+		[b]Attack Speed[/b] {attackSpeed}\n
+		[b]Attack Power[/b] {attackPower}\n
+		[b]Multishot[/b] {multishot}\n
+		[b]Movement Speed[/b] {movementSpeed}
 		"
-		.format({"status": Global.boss_fight}))
+		.format({
+			"status": Global.boss_fight,
+			"attackPower" : Global.Player_temp_data["attack_power"],
+			"attackSpeed" : Global.Player_temp_data["attack_speed"],
+			"movementSpeed" : Global.Player_temp_data["movement_speed"],
+			"maxHealth" : Global.Player_temp_data["max_hp"],
+			"hp" : Global.Player_temp_data["hp"],
+			"multishot" : Global.Player_temp_data["powerups"]["multishot"]
+			}))
 
 func toggle_godmode():
 	godmode = !godmode
@@ -45,11 +58,10 @@ func toggle_noclip():
 	emit_signal("Player_toggle_noclip", noclip)
 
 func heal_player():
-	Global.player_heal.emit()
+	Global.heal_player(20000)
 
 func damage_player():
 	Global.player_damage.emit(10)
-
 
 func _process(_delta):
 	var dev_godmode = Input.is_action_just_pressed("dev_godmode")
@@ -70,3 +82,4 @@ func _process(_delta):
 		heal_player()
 	if dev_damage:
 		damage_player()
+	Ui_update()

@@ -1,7 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://dh4s221kgtc83"]
+[gd_scene load_steps=22 format=3 uid="uid://dh4s221kgtc83"]
 
 [ext_resource type="Script" path="res://assets/scripts/player.gd" id="1_216rl"]
 [ext_resource type="Texture2D" uid="uid://wo22c5ole6cp" path="res://assets/art/player.png" id="2_gif0e"]
+[ext_resource type="Texture2D" uid="uid://bynt3reh3inbe" path="res://assets/art/arrow.png" id="3_bwbp7"]
 [ext_resource type="Texture2D" uid="uid://o4g7ubtw4yc2" path="res://assets/art/Knife-temp.png" id="3_g6c5f"]
 [ext_resource type="Texture2D" uid="uid://conisvovf8k6i" path="res://assets/art/Circle.png" id="4_6wl06"]
 
@@ -314,7 +315,14 @@ libraries = {
 "": SubResource("AnimationLibrary_id0dm")
 }
 
+[node name="ArrowSprite" type="Sprite2D" parent="Sprite2D"]
+z_index = 2
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_bwbp7")
+offset = Vector2(96.34, 0)
+
 [node name="KnifeSprite" type="Sprite2D" parent="Sprite2D"]
+visible = false
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("3_g6c5f")
 offset = Vector2(85.32, 0)

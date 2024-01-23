@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://45sv0g38letu"]
+
+[ext_resource type="Script" path="res://assets/scripts/Item.gd" id="1_ceryi"]
+[ext_resource type="Texture2D" uid="uid://do2mmmt05g2q7" path="res://assets/art/drzwi.png" id="2_m7ngp"]
+
+[resource]
+script = ExtResource("1_ceryi")
+name = ""
+statUpgrades = {
+"AttackPower": 5,
+"Lifesteal": 5
+}
+texture = ExtResource("2_m7ngp")

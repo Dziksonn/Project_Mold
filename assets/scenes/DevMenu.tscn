@@ -9,12 +9,12 @@ script = ExtResource("1_m1kky")
 offset_left = 1001.0
 offset_top = 14.0
 offset_right = 1269.0
-offset_bottom = 186.0
+offset_bottom = 441.0
 color = Color(0, 0, 0, 0.396078)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 offset_left = 1004.0
 offset_top = 18.0
 offset_right = 1266.0
-offset_bottom = 182.0
+offset_bottom = 436.0
 bbcode_enabled = true
