@@ -29,22 +29,45 @@ func receiveDamage(amount, knock_direction : Vector2):
 	health -= amount
 	$HealthBar.value = health
 	knockback(knock_direction)
-	
+	$AudioStreamPlayer2D.play()
 	$Dummy.modulate	= Color(1, 0.4, 0.4)
 	if health <= 0:
 		die()
 	await get_tree().create_timer(0.2).timeout
 	$Dummy.modulate	= Color(1, 1, 1)
 
+func _bleed(ticks,amount):
+	await get_tree().create_timer(0.4).timeout
+	for i in range(ticks):
+		print(i)
+		receiveDamage(amount,Vector2(0,0))
+		await get_tree().create_timer(1).timeout
+
 func die():
-	if(rng.randf_range(0,100) >= 60):
-		var size = Global.All_items.size()-1
-		var ItemToDrop = Global.All_items[rng.randi_range(0,size)]
-		var ItemDropObject = preload("res://assets/scenes/dropped_item.tscn").instantiate()
-		ItemDropObject.position = self.position
-		ItemDropObject.get_child(0).texture = ItemToDrop.texture
-		ItemDropObject.itemToAdd = ItemToDrop
-		get_tree().get_root().get_node(".").add_child(ItemDropObject)
+	if(rng.randf_range(0,100) >= 75):
+		if(rng.randf_range(0,100) >= 25):
+			var size = Global.Items_to_obtain["rare"].size()-1
+			if size >= 0:
+				var rand = rng.randi_range(0,size)
+				var ItemToDrop = Global.Items_to_obtain["rare"][Global.Items_to_obtain["rare"].keys()[rand]]
+				Global.Items_to_obtain["rare"].erase(Global.All_items["rare"].find_key(ItemToDrop))
+				var ItemDropObject = preload("res://assets/scenes/dropped_item.tscn").instantiate()
+				ItemDropObject.position = self.position
+				ItemDropObject.get_child(0).texture = ItemToDrop.texture
+				ItemDropObject.itemToAdd = ItemToDrop
+				get_tree().get_root().get_node(".").add_child(ItemDropObject)
+		else:
+			
+			var size = Global.Items_to_obtain["common"].size()-1
+			if size >= 0:
+				var rand = rng.randi_range(0,size)
+				var ItemToDrop = Global.Items_to_obtain["common"][Global.Items_to_obtain["common"].keys()[rand]]
+				Global.Items_to_obtain["common"].erase(Global.All_items["common"].find_key(ItemToDrop))
+				var ItemDropObject = preload("res://assets/scenes/dropped_item.tscn").instantiate()
+				ItemDropObject.position = self.position
+				ItemDropObject.get_child(0).texture = ItemToDrop.texture
+				ItemDropObject.itemToAdd = ItemToDrop
+				get_tree().get_root().get_node(".").add_child(ItemDropObject)
 	$AnimationPlayer.play('ded')
 	await $AnimationPlayer.animation_finished
 	queue_free()
@@ -63,7 +86,6 @@ func _physics_process(delta):
 	if is_instance_valid(player):
 
 		nav.target_position = player.position
-
 		direction = nav.get_next_path_position() - global_position
 		direction = direction.normalized()
 		if knockbacked:

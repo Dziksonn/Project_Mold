@@ -5,10 +5,8 @@
 
 [resource]
 script = ExtResource("1_g6g4r")
-name = "asd"
+name = "Knife"
 statUpgrades = {
-"MaxHealth": 20,
-"MovementSpeed": 10,
 "Multishot": 2
 }
 texture = ExtResource("2_3ou6d")

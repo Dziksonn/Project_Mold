@@ -131,6 +131,8 @@ func attack():
 		var attackpower = Global.Player_temp_data["attack_power"]
 		var Damage = rng.randi_range(attackpower-5,attackpower+5)
 		enemy.get_parent().receiveDamage(Damage,knockbackVector)
+		if Global.Player_temp_data["powerups"]["bleeding"] > 0:
+			enemy.get_parent()._bleed(Global.Player_temp_data["powerups"]["bleeding"],Damage*2/Global.Player_temp_data["powerups"]["bleeding"])
 
 	$Sprite2D/KnifeAnimation.play_backwards("attack")
 	await $Sprite2D/KnifeAnimation.animation_finished
@@ -188,8 +190,7 @@ func on_door_enter(direction, targetScene):
 	force = direction
 	$Sprite2D/DoorAnimation.play("smoll")
 	await $Sprite2D/DoorAnimation.animation_finished
-	SceneTransition.change_scene(targetScene)
-	print("ok")
+	SceneTransition.change_scene_packed(targetScene)
 
 func _player_toggle_noclip(noclip : bool):
 	freeze = false
@@ -235,3 +236,9 @@ func _on_item_magnet_area_exited(area):
 func _refreshStats():
 	attackSpeed = Global.Player_temp_data["attack_speed"]
 	speed = Global.Player_temp_data["movement_speed"]
+
+
+func _on_player_detector_area_entered(area):
+	var direction = area.get_parent().get_meta("direction")
+	on_door_enter(direction,area.get_meta("Scene"))
+	

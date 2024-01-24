@@ -14,3 +14,4 @@ func refresh():
 	$TextureProgressBar.value = Store_hp
 	$enemy_kills/RichTextLabel.set_text(str(Store_enemies))
 	$money/RichTextLabel.set_text(str(Store_coins))
+	$TextureProgressBar/hp_text.set_text("[center]" + str(Store_hp) + "/" + str(Store_maxhp) + "[/center]")

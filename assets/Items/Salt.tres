@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://b1ttuym1euph3"]
+
+[ext_resource type="Script" path="res://assets/scripts/Item.gd" id="1_cciht"]
+[ext_resource type="Texture2D" uid="uid://cp8is63vk0bcm" path="res://assets/art/item_art/SOLNICZKA.png" id="2_mfxwe"]
+
+[resource]
+script = ExtResource("1_cciht")
+name = "Salt"
+statUpgrades = {
+"Bleeding": 2
+}
+texture = ExtResource("2_mfxwe")

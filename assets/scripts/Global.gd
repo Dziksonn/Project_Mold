@@ -8,12 +8,21 @@ signal enemy_killed()
 signal coins_earned(number)
 signal add_item(Item)
 
-var All_items: Dictionary = {
-	0:preload("res://assets/Items/HealthUpTestItem.tres"),
-	1:preload("res://assets/Items/TestItem.tres"),
-	2:preload("res://assets/Items/DoorItem.tres"),
-	3:preload("res://assets/Items/Spoon.tres")
+var All_items: Dictionary = {	
+	"common":{
+		0:preload("res://assets/Items/Cutting_board.tres"),
+		1:preload("res://assets/Items/Spoon.tres"),
+		2:preload("res://assets/Items/Fork.tres"),
+		},
+	"rare":{
+		0:preload("res://assets/Items/Knife.tres"),
+		1:preload("res://assets/Items/Salt.tres"),
+		2:preload("res://assets/Items/Pepper.tres"),
+	},
+	
+
 }
+var Items_to_obtain:Dictionary = All_items
 
 var Player_Items:Array[Item]
 var Player_temp_data : Dictionary = {
@@ -26,7 +35,8 @@ var Player_temp_data : Dictionary = {
 	"enemy_kills_per_run" = 0,
 	"powerups" = {
 		"multishot":1,
-		"lifesteal":0
+		"lifesteal":0,
+		"bleeding":0
 	}}
 var Player_data : Dictionary = {"coins" = 0, "enemy_kills" = 0}
 var actual_scene : String
@@ -69,8 +79,6 @@ func _damage_player(number):
 	Player_temp_data.hp -= number
 	if Player_temp_data.hp <= 0:
 		kill_player()
-	#print("Damage")
-	#print(Player_temp_data.hp)
 
 func heal_player(amount):
 	Player_temp_data["hp"] += amount
@@ -82,7 +90,6 @@ func kill_player():
 	player_died.emit()
 
 func _enemy_killed():
-	print(Player_data.enemy_kills)
 	Player_data.enemy_kills += 1
 	Player_temp_data.enemy_kills_per_run += 1
 	heal_player(Player_temp_data["powerups"]["lifesteal"])
@@ -93,7 +100,6 @@ func _coins_earned(number):
 	Player_data.coins += number
 
 func _ready():
-	print(All_items[0].name)
 	player_damage.connect(_damage_player)
 	enemy_killed.connect(_enemy_killed)
 	coins_earned.connect(_coins_earned)
@@ -122,5 +128,13 @@ func _add_item(item:Item):
 				Player_temp_data["attack_power"]+= item.statUpgrades[upgrade]
 			"Lifesteal":
 				Player_temp_data["powerups"]["lifesteal"]+= item.statUpgrades[upgrade]
-	refresh_hud()
+			"Bleeding":
+				Player_temp_data["powerups"]["bleeding"]+= item.statUpgrades[upgrade]
+				for _item in Player_Items:
+					if _item.name == "Pepper":
+						Player_temp_data["powerups"]["bleeding"]+= item.statUpgrades[upgrade]
+			"BleedingEnchance":
+				for _item in Player_Items:
+					if _item.name == "Salt":
+						Player_temp_data["powerups"]["bleeding"] += Player_temp_data["powerups"]["bleeding"]
 	Global.refresh_stats.emit()

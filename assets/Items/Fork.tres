@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://mdt1lklxvijc"]
+
+[ext_resource type="Script" path="res://assets/scripts/Item.gd" id="1_ie13h"]
+[ext_resource type="Texture2D" uid="uid://c018mx7tmdv6d" path="res://assets/art/item_art/WIDELEC.png" id="2_sby2l"]
+
+[resource]
+script = ExtResource("1_ie13h")
+name = "Fork"
+statUpgrades = {
+"AttackPower": 5,
+"Lifesteal": 2
+}
+texture = ExtResource("2_sby2l")

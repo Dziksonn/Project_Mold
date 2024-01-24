@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://0b8k847v4gec"]
+
+[ext_resource type="Script" path="res://assets/scripts/Item.gd" id="1_h0llr"]
+[ext_resource type="Texture2D" uid="uid://bogboiya7my8r" path="res://assets/art/item_art/PIEPSZNICZKA.png" id="2_3tyou"]
+
+[resource]
+script = ExtResource("1_h0llr")
+name = "Pepper"
+statUpgrades = {
+"AttackSpeed": 1.0,
+"BleedingEnchance": null
+}
+texture = ExtResource("2_3tyou")

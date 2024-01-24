@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bdnptnmclj4uv"]
+[gd_scene load_steps=8 format=3 uid="uid://bdnptnmclj4uv"]
 
 [ext_resource type="Texture2D" uid="uid://b0thbimj1uh8j" path="res://assets/art/pizza.png" id="1_aeo5w"]
 [ext_resource type="Script" path="res://assets/scripts/enemy.gd" id="1_gmd32"]
+[ext_resource type="AudioStream" uid="uid://buqo625ktmvdp" path="res://assets/sounds/sfx/hitHurt (1).wav" id="3_5ykby"]
 
 [sub_resource type="Animation" id="Animation_l8j2u"]
 resource_name = "RESET"
@@ -193,3 +194,7 @@ debug_color = Color(0, 0.407843, 0.478431, 0.419608)
 navigation_layers = 8
 avoidance_layers = 8
 avoidance_mask = 8
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_5ykby")
+volume_db = -26.134

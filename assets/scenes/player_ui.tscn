@@ -21,6 +21,17 @@ texture_under = ExtResource("1_g3l81")
 texture_progress = ExtResource("2_8ly2n")
 texture_progress_offset = Vector2(14, 0)
 
+[node name="hp_text" type="RichTextLabel" parent="TextureProgressBar"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 3.0
+offset_right = 125.0
+offset_bottom = 28.0
+scale = Vector2(0.430312, 0.430312)
+bbcode_enabled = true
+text = "[center]100/100[/center]"
+autowrap_mode = 0
+
 [node name="enemy_kills" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0

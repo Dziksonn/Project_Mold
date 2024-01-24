@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cx2fsrlu58fh8"
-path="res://.godot/imported/Spoon.png-fc113ef0e1e646de7c18ab48814a505b.ctex"
+path="res://.godot/imported/Spoon.png-5c0137522b83675f2b3dff35893fd1b8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/Spoon.png"
-dest_files=["res://.godot/imported/Spoon.png-fc113ef0e1e646de7c18ab48814a505b.ctex"]
+source_file="res://assets/art/item_art/Spoon.png"
+dest_files=["res://.godot/imported/Spoon.png-5c0137522b83675f2b3dff35893fd1b8.ctex"]
 
 [params]
 

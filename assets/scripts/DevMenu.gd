@@ -32,7 +32,9 @@ func Ui_update():
 		[b]Attack Speed[/b] {attackSpeed}\n
 		[b]Attack Power[/b] {attackPower}\n
 		[b]Multishot[/b] {multishot}\n
-		[b]Movement Speed[/b] {movementSpeed}
+		[b]Movement Speed[/b] {movementSpeed}\n
+		[b]Lifesteal[/b] {lifesteal}\n
+		[b]Bleeding[/b] {bleeding}
 		"
 		.format({
 			"status": Global.boss_fight,
@@ -41,7 +43,9 @@ func Ui_update():
 			"movementSpeed" : Global.Player_temp_data["movement_speed"],
 			"maxHealth" : Global.Player_temp_data["max_hp"],
 			"hp" : Global.Player_temp_data["hp"],
-			"multishot" : Global.Player_temp_data["powerups"]["multishot"]
+			"multishot" : Global.Player_temp_data["powerups"]["multishot"],
+			"lifesteal" : Global.Player_temp_data["powerups"]["lifesteal"],
+			"bleeding" : Global.Player_temp_data["powerups"]["bleeding"]
 			}))
 
 func toggle_godmode():
