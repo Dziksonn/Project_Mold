@@ -284,7 +284,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qgisa"]
-size = Vector2(22.6667, 80)
+size = Vector2(22.6667, 78.3333)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jky14"]
 size = Vector2(95.1667, 132)
@@ -344,7 +344,7 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(3.57628e-07, 1)
+position = Vector2(3.57628e-07, 1.83333)
 shape = SubResource("RectangleShape2D_qgisa")
 
 [node name="Control" type="Control" parent="."]

@@ -1,29 +1,32 @@
-[gd_scene load_steps=7 format=3 uid="uid://fudacns2hhxc"]
+[gd_scene load_steps=8 format=3 uid="uid://fudacns2hhxc"]
 
 [ext_resource type="PackedScene" uid="uid://dh4s221kgtc83" path="res://assets/scenes/player.tscn" id="1_dl7al"]
-[ext_resource type="Texture2D" uid="uid://druxpraxh7kd4" path="res://assets/art/droga.png" id="2_0lalm"]
+[ext_resource type="Texture2D" uid="uid://bhfwj0h4o8usw" path="res://assets/art/lobby.png" id="2_jodbr"]
 [ext_resource type="PackedScene" uid="uid://bptxe5n601tay" path="res://assets/scenes/drzwi.tscn" id="3_ov6w6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cmtqn"]
-size = Vector2(24.3333, 78)
+size = Vector2(24.3333, 5.99998)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3mbdq"]
-size = Vector2(8.33325, 202.333)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0saq4"]
+size = Vector2(1025, 9.33334)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1qgx6"]
-size = Vector2(6.66669, 157.333)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n7jtk"]
+size = Vector2(30.0007, 791)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_no6py"]
+size = Vector2(9.33334, 255)
 
 [node name="lobby" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_dl7al")]
 z_index = 2
-position = Vector2(437, 943)
+position = Vector2(65, 497)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 limit_left = 20
 limit_top = 20
-limit_right = 2705
-limit_bottom = 1275
+limit_right = 3065
+limit_bottom = 760
 limit_smoothed = true
 editor_draw_limits = true
 
@@ -31,12 +34,12 @@ editor_draw_limits = true
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/PlayerDetector"]
-position = Vector2(0.166667, -0.333333)
+position = Vector2(0.166666, 35.6667)
 shape = SubResource("RectangleShape2D_cmtqn")
 debug_color = Color(0, 0, 0, 0.419608)
 
 [node name="Background" type="StaticBody2D" parent="."]
-position = Vector2(1367, 642)
+position = Vector2(1537, 385)
 scale = Vector2(3, 3)
 collision_layer = 2
 metadata/_edit_group_ = true
@@ -44,24 +47,33 @@ metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Background"]
 z_index = -1
-texture = ExtResource("2_0lalm")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background"]
-polygon = PackedVector2Array(-450, 1, -420, -20, -370, -32, -319, -31.6667, -319.333, -120.333, -269.333, -119, -269.667, -31.6667, -237, -33, -169, -18, -122, 6, -76, 25, -37, 29, 22, 26, 79, 17, 127, -7, 193, -33, 237, -53, 296, -61, 358, -51, 417, -28, 453, -9, 453, -210, -452, -211)
-
-[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Background"]
-polygon = PackedVector2Array(-452, 197, -355, 183, -273, 171, -196, 168, -111, 170, -39, 181, 48, 189, 133, 190, 199, 169, 264, 131, 320, 107, 385, 105, 430, 126, 451, 134, 452, 213, -452, 215)
+texture = ExtResource("2_jodbr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Background"]
-position = Vector2(-449.167, 94.5)
-shape = SubResource("RectangleShape2D_3mbdq")
+position = Vector2(-0.166687, 129.667)
+shape = SubResource("RectangleShape2D_0saq4")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Background"]
-position = Vector2(448.667, 61)
-shape = SubResource("RectangleShape2D_1qgx6")
+position = Vector2(-510.667, 0.166641)
+scale = Vector2(0.333333, 0.333333)
+shape = SubResource("RectangleShape2D_n7jtk")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Background"]
+position = Vector2(514, -0.833359)
+shape = SubResource("RectangleShape2D_no6py")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background"]
+position = Vector2(-512.333, -128.333)
+scale = Vector2(0.333333, 0.333333)
+polygon = PackedVector2Array(17, 384, 745.818, 380.907, 746, 363, 895, 361, 896.646, 380.267, 3080, 371, 3080, -9, 15, -15)
 
 [node name="Drzwi" parent="." instance=ExtResource("3_ov6w6")]
-position = Vector2(40, -359)
+position = Vector2(378, -300)
 collision_layer = 4
 targetScene = "res://assets/scenes/debug_bg_scene.tscn"
 metadata/direction = "up"
+
+[node name="CollisionShape2D" parent="Drzwi" index="0"]
+position = Vector2(444, 782.5)
+
+[editable path="Drzwi"]

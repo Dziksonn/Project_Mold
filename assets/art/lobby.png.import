@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://druxpraxh7kd4"
-path="res://.godot/imported/droga.png-2e977e2067b7a1ecd85b722e38663b76.ctex"
+uid="uid://bhfwj0h4o8usw"
+path="res://.godot/imported/lobby.png-2f626485661045ea0851e521dad0496b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/droga.png"
-dest_files=["res://.godot/imported/droga.png-2e977e2067b7a1ecd85b722e38663b76.ctex"]
+source_file="res://assets/art/lobby.png"
+dest_files=["res://.godot/imported/lobby.png-2f626485661045ea0851e521dad0496b.ctex"]
 
 [params]
 
