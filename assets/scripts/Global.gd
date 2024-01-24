@@ -11,7 +11,8 @@ signal add_item(Item)
 var All_items: Dictionary = {
 	0:preload("res://assets/Items/HealthUpTestItem.tres"),
 	1:preload("res://assets/Items/TestItem.tres"),
-	2:preload("res://assets/Items/DoorItem.tres")
+	2:preload("res://assets/Items/DoorItem.tres"),
+	3:preload("res://assets/Items/Spoon.tres")
 }
 
 var Player_Items:Array[Item]

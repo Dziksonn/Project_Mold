@@ -205,12 +205,20 @@ func _player_toggle_noclip(noclip : bool):
 		set_collision_mask_value(4, true)
 
 func _kill_player():
-	queue_free()
+	if !freeze:
+		$DeathSound.play()
+		freeze = true
+		canAttack = false
+		$Sprite2D.modulate	= Color(1, 0.4, 0.4)
+		await get_tree().create_timer(1).timeout
+		queue_free()
 
 func _player_damage(_number):
-	$Sprite2D.modulate	= Color(1, 0.4, 0.4)
-	await get_tree().create_timer(0.4).timeout
-	$Sprite2D.modulate	= Color(1, 1, 1)
+	if !freeze:
+		$HurtSound.play()
+		$Sprite2D.modulate	= Color(1, 0.4, 0.4)
+		await get_tree().create_timer(0.4).timeout
+		$Sprite2D.modulate	= Color(1, 1, 1)
 
 func _on_item_pickup_area_entered(area):
 	var itemToAdd:Item = area.get_parent().itemToAdd
