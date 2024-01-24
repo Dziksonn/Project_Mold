@@ -20,9 +20,9 @@ var Player_temp_data : Dictionary = {
 	"attack_power" = 10,
 	"attack_speed" = 1,
 	"movement_speed" = 400,
-	"hp" = 100, 
-	"max_hp" = 100, 
-	"is_dead" = false, 
+	"hp" = 100,
+	"max_hp" = 100,
+	"is_dead" = false,
 	"enemy_kills_per_run" = 0,
 	"powerups" = {
 		"multishot":1,
@@ -34,7 +34,7 @@ var boss_fight : bool = false
 var show_hud : bool = true
 
 func set_scene(scene_name):
-	
+
 	actual_scene = scene_name
 	match actual_scene:
 		"boss_scene":
@@ -45,6 +45,10 @@ func set_scene(scene_name):
 			show_hud = false
 			PlayerUi.set_hud_visible(false)
 		"lobby":
+			boss_fight = false
+			show_hud = false
+			PlayerUi.set_hud_visible(false)
+		"intro":
 			boss_fight = false
 			show_hud = false
 			PlayerUi.set_hud_visible(false)
@@ -82,8 +86,8 @@ func _enemy_killed():
 	Player_data.enemy_kills += 1
 	Player_temp_data.enemy_kills_per_run += 1
 	heal_player(Player_temp_data["powerups"]["lifesteal"])
-	
-	
+
+
 
 func _coins_earned(number):
 	Player_data.coins += number
