@@ -8,6 +8,10 @@ signal enemy_killed()
 signal coins_earned(number)
 signal add_item(Item)
 
+var actual_scene : String
+var boss_fight : bool = false
+var show_hud : bool = true
+
 var All_items: Dictionary = {
 	"common":{
 		0:preload("res://assets/Items/Cutting_board.tres"),
@@ -19,8 +23,6 @@ var All_items: Dictionary = {
 		1:preload("res://assets/Items/Salt.tres"),
 		2:preload("res://assets/Items/Pepper.tres"),
 	},
-
-
 }
 var Items_to_obtain:Dictionary = All_items
 
@@ -47,37 +49,30 @@ var Player_temp_data : Dictionary = {
 		"lifesteal":0,
 		"bleeding":0
 	}}
-var Player_data : Dictionary = {"coins" = 0, "enemy_kills" = 0}
-var actual_scene : String
-var boss_fight : bool = false
-var show_hud : bool = true
+var Player_data : Dictionary = {
+	"coins" = 0,
+	"enemy_kills" = 0
+}
 
 func set_scene(scene_name):
-
 	actual_scene = scene_name
 	match actual_scene:
 		"boss_scene":
-			boss_fight = false
-			PlayerUi.set_hud_visible(true)
+			handle_scene_change(false, true)
 		"menu":
-			boss_fight = true
-			show_hud = false
-			PlayerUi.set_hud_visible(false)
+			handle_scene_change(true, false)
 		"lobby":
-			boss_fight = false
-			show_hud = false
 			reset_buffs()
-			PlayerUi.set_hud_visible(false)
-			print("test")
+			handle_scene_change(false, false)
 		"intro":
-			boss_fight = false
-			show_hud = false
-			PlayerUi.set_hud_visible(false)
+			handle_scene_change(false, false)
 		_: #default
-			boss_fight = false
-			show_hud = true
-			PlayerUi.set_hud_visible(true)
+			handle_scene_change(false, true)
 
+func handle_scene_change(temp_boss_fight, hud):
+	boss_fight = temp_boss_fight
+	show_hud = hud
+	PlayerUi.set_hud_visible(hud)
 
 func reset_buffs():
 	Player_temp_data = {
@@ -98,10 +93,10 @@ func reset_buffs():
 			for stat in Player_Perma_Items[item]["stats"]:
 				Player_temp_data[stat] += Player_Perma_Items[item]["stats"][stat]
 
-func buy_item(name):
-	if Player_data["coins"] >= Player_Perma_Items[name]["price"]:
-		Player_data["coins"] -= Player_Perma_Items[name]["price"]
-		Player_Perma_Items[name]["bought"] = true
+func buy_item(item_name):
+	if Player_data["coins"] >= Player_Perma_Items[item_name]["price"]:
+		Player_data["coins"] -= Player_Perma_Items[item_name]["price"]
+		Player_Perma_Items[item_name]["bought"] = true
 		reset_buffs()
 		Global.refresh_stats.emit()
 		return true
@@ -116,11 +111,6 @@ func refresh_hud():
 	PlayerUi.Store_coins = Player_data.coins
 	PlayerUi.refresh()
 
-func _damage_player(number):
-	Player_temp_data.hp -= number
-	if Player_temp_data.hp <= 0:
-		kill_player()
-
 func heal_player(amount):
 	Player_temp_data["hp"] += amount
 	if Player_temp_data["hp"] > Player_temp_data["max_hp"]:
@@ -130,12 +120,15 @@ func kill_player():
 	Player_temp_data.is_dead = true
 	player_died.emit()
 
+func _damage_player(number):
+	Player_temp_data.hp -= number
+	if Player_temp_data.hp <= 0:
+		kill_player()
+
 func _enemy_killed():
 	Player_data.enemy_kills += 1
 	Player_temp_data.enemy_kills_per_run += 1
 	heal_player(Player_temp_data["powerups"]["lifesteal"])
-
-
 
 func _coins_earned(number):
 	Player_data.coins += number
@@ -146,9 +139,6 @@ func _ready():
 	coins_earned.connect(_coins_earned)
 	add_item.connect(_add_item)
 	pass
-
-func _process(_delta):
-	refresh_hud()
 
 func _add_item(item:Item):
 	Player_Items.append(item)
@@ -179,3 +169,6 @@ func _add_item(item:Item):
 					if _item.name == "Salt":
 						Player_temp_data["powerups"]["bleeding"] += Player_temp_data["powerups"]["bleeding"]
 	Global.refresh_stats.emit()
+
+func _process(_delta):
+	refresh_hud()

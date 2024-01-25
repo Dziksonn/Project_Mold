@@ -4,7 +4,7 @@ var itemToAdd:Item
 var isMagnetized = false
 var objectToLookAt:Node
 
-func _process(delta):
+func _process(_delta):
 	if(isMagnetized):
 		$Texture.look_at(objectToLookAt.position)
 		apply_impulse(Vector2.RIGHT.rotated($Texture.rotation)*0.025)

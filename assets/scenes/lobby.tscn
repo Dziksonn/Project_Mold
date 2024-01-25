@@ -77,8 +77,8 @@ polygon = PackedVector2Array(17, 384, 464.004, 382.103, 464, 355.999, 596, 356.9
 [node name="Drzwi" parent="." instance=ExtResource("3_ov6w6")]
 position = Vector2(378, -300)
 collision_layer = 4
-metadata/direction = "up"
 metadata/Scene = ExtResource("4_51jbe")
+metadata/Direction = "up"
 
 [node name="CollisionShape2D" parent="Drzwi" index="0"]
 position = Vector2(444, 782.5)
@@ -93,8 +93,8 @@ text = "DEBUG"
 [node name="Drzwi2" parent="." instance=ExtResource("3_ov6w6")]
 position = Vector2(867, -300)
 collision_layer = 4
-metadata/direction = "up"
 metadata/Scene = ExtResource("5_u3ai4")
+metadata/Direction = "up"
 
 [node name="CollisionShape2D" parent="Drzwi2" index="0"]
 position = Vector2(444, 782.5)

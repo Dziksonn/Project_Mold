@@ -22,25 +22,25 @@ func _ready():
 	set_physics_process(false)
 	await get_tree().physics_frame
 	set_physics_process(true)
-	get_node("Hitbox").body_entered.connect(OnBodyEntered)
-	get_node("Hitbox").body_exited.connect(OnBodyExited)
+	$Hitbox.body_entered.connect(OnBodyEntered)
+	$Hitbox.body_exited.connect(OnBodyExited)
 
 func receiveDamage(amount, knock_direction : Vector2):
 	health -= amount
 	$HealthBar.value = health
-	knockback(knock_direction)
 	$AudioStreamPlayer2D.play()
 	$Dummy.modulate	= Color(1, 0.4, 0.4)
+	knockback(knock_direction)
 	if health <= 0:
 		die()
 	await get_tree().create_timer(0.2).timeout
 	$Dummy.modulate	= Color(1, 1, 1)
 
-func _bleed(ticks,amount):
+func _bleed(ticks, amount):
 	await get_tree().create_timer(0.4).timeout
 	for i in range(ticks):
 		print(i)
-		receiveDamage(amount,Vector2(0,0))
+		receiveDamage(amount, Vector2(0,0))
 		await get_tree().create_timer(1).timeout
 
 func die():
@@ -59,11 +59,12 @@ func drop_item():
 		else:
 			rarity = "common"
 
-		var size = Global.Items_to_obtain[rarity].size()-1
+		var items_to_obtain = Global.Items_to_obtain[rarity]
+		var size = items_to_obtain.size()-1
 		if size >= 0:
 			var rand = rng.randi_range(0,size)
-			var ItemToDrop = Global.Items_to_obtain[rarity][Global.Items_to_obtain[rarity].keys()[rand]]
-			Global.Items_to_obtain[rarity].erase(Global.All_items[rarity].find_key(ItemToDrop))
+			var ItemToDrop = items_to_obtain[items_to_obtain.keys()[rand]]
+			items_to_obtain.erase(items_to_obtain.find_key(ItemToDrop))
 			var ItemDropObject = preload("res://assets/scenes/dropped_item.tscn").instantiate()
 			ItemDropObject.position = self.position
 			ItemDropObject.get_child(0).texture = ItemToDrop.texture

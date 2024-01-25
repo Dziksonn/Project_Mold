@@ -28,7 +28,7 @@ func _ready():
 	Global.player_damage.connect(_player_damage)
 	Global.refresh_stats.connect(_refreshStats)
 	_refreshStats()
-	
+
 func _process(delta):
 	cooldown -= delta
 	alt_cooldown -= delta
@@ -85,7 +85,7 @@ func _process(delta):
 	else:
 		$Sprite2D/KnifeSprite.look_at(get_global_mouse_position())
 		$Sprite2D/ArrowSprite.look_at(get_global_mouse_position())
-		
+
 	if(controls.attack):
 		if cooldown <= 0:
 			attack()
@@ -102,7 +102,7 @@ func shoot_knife(_direction):
 func alt_attack():
 	if(!canAttack):
 		return
-	alt_cooldown = 1 / ((attackSpeed)*2 -1) * 2
+	alt_cooldown = 1.0 / ((attackSpeed)*2 -1) * 2
 	$Control/TextureProgressBar.value=alt_cooldown
 	match Global.Player_temp_data["powerups"]["multishot"]:
 		1:
@@ -117,11 +117,11 @@ func alt_attack():
 			shoot_knife(0)
 			shoot_knife(PI/12)
 			shoot_knife(PI/6)
-	
+
 func attack():
 	if(!canAttack):
 		return
-	cooldown = 1 / attackSpeed
+	cooldown = 1.0 / attackSpeed
 	$Sprite2D/KnifeSprite.visible = true
 	$Sprite2D/KnifeAnimation.play("attack")
 	await $Sprite2D/KnifeAnimation.animation_finished
@@ -239,6 +239,9 @@ func _refreshStats():
 
 
 func _on_player_detector_area_entered(area):
-	var direction = area.get_parent().get_meta("direction")
-	on_door_enter(direction,area.get_meta("Scene"))
-	
+	var direction = area.get_meta("Direction")
+	var scene = area.get_meta("Scene")
+	print(direction)
+	print(scene)
+	on_door_enter(area.get_meta("Direction"),area.get_meta("Scene"))
+
