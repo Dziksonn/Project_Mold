@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://2s64xc6mvv18"]
+[gd_scene load_steps=6 format=3 uid="uid://2s64xc6mvv18"]
 
 [ext_resource type="Script" path="res://assets/scripts/shop_menu.gd" id="1_8p3yq"]
 [ext_resource type="FontFile" uid="uid://ciwxw5qfslmqf" path="res://assets/fonts/PixeloidSans-mLxMm.ttf" id="2_tw3vy"]
 [ext_resource type="Texture2D" uid="uid://c018mx7tmdv6d" path="res://assets/art/item_art/WIDELEC.png" id="3_f3us7"]
 [ext_resource type="Texture2D" uid="uid://cfdef57o4q2og" path="res://assets/art/spinning_coin.png" id="4_h4w1h"]
+[ext_resource type="Texture2D" uid="uid://cy88jg88yfnwa" path="res://assets/art/item_art/GOMBKA.png" id="5_y3j1l"]
 
 [node name="Control" type="Control"]
 z_index = 10
@@ -47,6 +48,30 @@ offset_right = 89.0
 offset_bottom = 51.0
 color = Color(1, 0, 0, 0.270588)
 
+[node name="Sponge_Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 228.0
+offset_top = 86.0
+offset_right = 334.0
+offset_bottom = 138.0
+theme_override_fonts/font = ExtResource("2_tw3vy")
+text = "1000"
+icon = ExtResource("5_y3j1l")
+alignment = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="Sponge_Button"]
+position = Vector2(89, 29)
+scale = Vector2(0.555556, 0.555556)
+texture = ExtResource("4_h4w1h")
+hframes = 6
+
+[node name="ColorRect" type="ColorRect" parent="Sponge_Button"]
+visible = false
+layout_mode = 0
+offset_right = 106.0
+offset_bottom = 51.0
+color = Color(1, 0, 0, 0.270588)
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(118, 450)
 scale = Vector2(1.4, 1.44444)
@@ -63,3 +88,4 @@ theme_override_fonts/normal_font = ExtResource("2_tw3vy")
 theme_override_font_sizes/normal_font_size = 31
 
 [connection signal="pressed" from="Fork_Button" to="." method="_on_fork_button_pressed"]
+[connection signal="pressed" from="Sponge_Button" to="." method="_on_sponge_button_pressed"]

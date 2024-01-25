@@ -7,6 +7,6 @@
 script = ExtResource("1_cciht")
 name = "Salt"
 statUpgrades = {
-"Bleeding": 2
+"Bleeding": 1
 }
 texture = ExtResource("2_mfxwe")

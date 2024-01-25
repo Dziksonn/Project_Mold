@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://bl3rexrahyhhg"]
+
+[ext_resource type="Script" path="res://assets/scripts/Item.gd" id="1_7lkcq"]
+[ext_resource type="Texture2D" uid="uid://cp5denejjmc4i" path="res://assets/art/item_art/WALEK.png" id="2_wuk2s"]
+
+[resource]
+script = ExtResource("1_7lkcq")
+name = "Rolling pin"
+statUpgrades = {
+"AttackPower": 5
+}
+texture = ExtResource("2_wuk2s")

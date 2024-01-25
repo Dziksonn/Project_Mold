@@ -17,11 +17,15 @@ var All_items: Dictionary = {
 		0:preload("res://assets/Items/Cutting_board.tres"),
 		1:preload("res://assets/Items/Spoon.tres"),
 		2:preload("res://assets/Items/Fork.tres"),
+		3:preload("res://assets/Items/Rolling_pin.tres"),
+		4:preload("res://assets/Items/Towel.tres")
 		},
 	"rare":{
 		0:preload("res://assets/Items/Knife.tres"),
 		1:preload("res://assets/Items/Salt.tres"),
 		2:preload("res://assets/Items/Pepper.tres"),
+		3:preload("res://assets/Items/Not_a_pan.tres"),
+		4:preload("res://assets/Items/Chopper.tres")
 	},
 }
 var Items_to_obtain:Dictionary = All_items
@@ -32,7 +36,15 @@ var Player_Perma_Items : Dictionary = {
 		"bought" = false,
 		"price" = 100,
 		"stats" = {
-			"attack_power" = 100
+			"attack_power" = 5
+		}
+	},
+	"sponge": {
+		"bought" = false,
+		"price" = 1000,
+		"stats" = {
+			"movement_speed" = 100,
+			"attack_power" = 5
 		}
 	}
 }
@@ -163,11 +175,11 @@ func _add_item(item:Item):
 				Player_temp_data["powerups"]["bleeding"]+= item.statUpgrades[upgrade]
 				for _item in Player_Items:
 					if _item.name == "Pepper":
-						Player_temp_data["powerups"]["bleeding"]+= item.statUpgrades[upgrade]
+						Player_temp_data["powerups"]["bleeding"]+= 1
 			"BleedingEnchance":
 				for _item in Player_Items:
 					if _item.name == "Salt":
-						Player_temp_data["powerups"]["bleeding"] += Player_temp_data["powerups"]["bleeding"]
+						Player_temp_data["powerups"]["bleeding"] += 1
 	Global.refresh_stats.emit()
 
 func _process(_delta):

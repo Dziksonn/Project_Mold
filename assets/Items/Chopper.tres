@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://bf78tqywu7sg0"]
+
+[ext_resource type="Script" path="res://assets/scripts/Item.gd" id="1_pvu34"]
+[ext_resource type="Texture2D" uid="uid://bgm0wl0smumy8" path="res://assets/art/item_art/TASAK.png" id="2_sa6pc"]
+
+[resource]
+script = ExtResource("1_pvu34")
+name = "Chopper"
+statUpgrades = {
+"AttackPower": 5,
+"Bleeding": 1
+}
+texture = ExtResource("2_sa6pc")

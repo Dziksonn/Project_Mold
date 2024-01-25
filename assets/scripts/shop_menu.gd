@@ -4,6 +4,10 @@ extends Control
 	"fork": {
 		"button": $Fork_Button,
 		"colorRect": $Fork_Button/ColorRect,
+	},
+	"sponge":{
+		"button": $Sponge_Button,
+		"colorRect":$Sponge_Button/ColorRect
 	}
 }
 
@@ -35,3 +39,6 @@ func button_press(item_name):
 
 func _on_fork_button_pressed():
 	button_press("fork")
+
+func _on_sponge_button_pressed():
+	button_press("sponge")
