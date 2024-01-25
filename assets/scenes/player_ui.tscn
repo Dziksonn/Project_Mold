@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c03fj8xv24mpd"]
+[gd_scene load_steps=8 format=3 uid="uid://c03fj8xv24mpd"]
 
 [ext_resource type="Texture2D" uid="uid://c3gft6sovajkj" path="res://assets/art/healthbar_under.png" id="1_g3l81"]
 [ext_resource type="Script" path="res://assets/scripts/PlayerUI.gd" id="1_p1881"]
@@ -6,33 +6,45 @@
 [ext_resource type="Texture2D" uid="uid://dfo36m0wp6e31" path="res://assets/art/enemy_kills_icon.png" id="4_guh7x"]
 [ext_resource type="FontFile" uid="uid://ciwxw5qfslmqf" path="res://assets/fonts/PixeloidSans-mLxMm.ttf" id="5_ddxk2"]
 [ext_resource type="Texture2D" uid="uid://cfdef57o4q2og" path="res://assets/art/spinning_coin.png" id="6_7fp6j"]
+[ext_resource type="FontFile" uid="uid://calcttk5u4fvw" path="res://assets/fonts/PixeloidSansBold-PKnYd.ttf" id="7_ebjng"]
 
 [node name="player_ui" type="CanvasLayer"]
 script = ExtResource("1_p1881")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
-offset_left = 14.0
-offset_top = 9.0
-offset_right = 78.0
-offset_bottom = 26.0
-scale = Vector2(3, 3)
-mouse_filter = 2
-texture_under = ExtResource("1_g3l81")
-texture_progress = ExtResource("2_8ly2n")
-texture_progress_offset = Vector2(14, 0)
+[node name="hud" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="hp_text" type="RichTextLabel" parent="TextureProgressBar"]
-layout_mode = 0
-offset_left = 17.0
-offset_top = 3.0
-offset_right = 125.0
-offset_bottom = 28.0
-scale = Vector2(0.430312, 0.430312)
-bbcode_enabled = true
-text = "[center]100/100[/center]"
-autowrap_mode = 0
+[node name="money" type="Control" parent="hud"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 22.0
+offset_top = 110.0
+offset_right = 95.0
+offset_bottom = 136.0
 
-[node name="enemy_kills" type="Control" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="hud/money"]
+position = Vector2(14, 14)
+scale = Vector2(1.3, 1.38889)
+texture = ExtResource("6_7fp6j")
+hframes = 6
+
+[node name="RichTextLabel" type="RichTextLabel" parent="hud/money"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -3.715
+anchor_bottom = -3.715
+offset_left = 31.0
+offset_top = 91.59
+offset_right = 198.0
+offset_bottom = 131.59
+theme_override_fonts/normal_font = ExtResource("5_ddxk2")
+theme_override_font_sizes/normal_font_size = 34
+fit_content = true
+
+[node name="enemy_kills" type="Control" parent="hud"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 13.0
@@ -41,11 +53,11 @@ offset_right = 222.0
 offset_bottom = 106.0
 metadata/_edit_group_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="enemy_kills"]
+[node name="Sprite2D" type="Sprite2D" parent="hud/enemy_kills"]
 position = Vector2(22, 20)
 texture = ExtResource("4_guh7x")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="enemy_kills"]
+[node name="RichTextLabel" type="RichTextLabel" parent="hud/enemy_kills"]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = -3.715
@@ -58,29 +70,59 @@ theme_override_fonts/normal_font = ExtResource("5_ddxk2")
 theme_override_font_sizes/normal_font_size = 34
 fit_content = true
 
-[node name="money" type="Control" parent="."]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="hud"]
+offset_left = 14.0
+offset_top = 9.0
+offset_right = 78.0
+offset_bottom = 26.0
+scale = Vector2(3, 3)
+mouse_filter = 2
+texture_under = ExtResource("1_g3l81")
+texture_progress = ExtResource("2_8ly2n")
+texture_progress_offset = Vector2(14, 0)
+
+[node name="hp_text" type="RichTextLabel" parent="hud/TextureProgressBar"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 3.0
+offset_right = 125.0
+offset_bottom = 28.0
+scale = Vector2(0.430312, 0.430312)
+bbcode_enabled = true
+text = "[center]100/100[/center]"
+autowrap_mode = 0
+
+[node name="death_screen" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 22.0
-offset_top = 110.0
-offset_right = 95.0
-offset_bottom = 136.0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="Sprite2D" type="Sprite2D" parent="money"]
-position = Vector2(14, 14)
-scale = Vector2(1.3, 1.38889)
-texture = ExtResource("6_7fp6j")
-hframes = 6
+[node name="ColorRect" type="ColorRect" parent="death_screen"]
+offset_left = -19.0
+offset_top = -21.0
+offset_right = 1327.0
+offset_bottom = 765.0
+color = Color(0, 0, 0, 1)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="money"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = -3.715
-anchor_bottom = -3.715
-offset_left = 31.0
-offset_top = 91.59
-offset_right = 198.0
-offset_bottom = 131.59
+[node name="RichTextLabel" type="RichTextLabel" parent="death_screen"]
+offset_left = 170.0
+offset_top = 99.0
+offset_right = 1280.0
+offset_bottom = 720.0
+theme_override_colors/default_color = Color(0.627451, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("5_ddxk2")
-theme_override_font_sizes/normal_font_size = 34
-fit_content = true
+theme_override_font_sizes/normal_font_size = 206
+text = "You died"
+
+[node name="Button" type="Button" parent="death_screen"]
+offset_left = 446.0
+offset_top = 347.0
+offset_right = 799.0
+offset_bottom = 474.0
+theme_override_colors/font_color = Color(0.678431, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_ebjng")
+theme_override_font_sizes/font_size = 66
+text = "Restart"
+
+[connection signal="pressed" from="death_screen/Button" to="." method="_on_button_pressed"]

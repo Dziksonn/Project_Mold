@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://csfjlw13h66h6"]
+[gd_scene load_steps=8 format=3 uid="uid://csfjlw13h66h6"]
 
 [ext_resource type="Texture2D" uid="uid://dvjr40myqn714" path="res://assets/art/debug_bg.png" id="1_k3co1"]
 [ext_resource type="PackedScene" uid="uid://dh4s221kgtc83" path="res://assets/scenes/player.tscn" id="2_3it2h"]
-[ext_resource type="PackedScene" uid="uid://c03fj8xv24mpd" path="res://assets/scenes/player_ui.tscn" id="3_8wlmp"]
 [ext_resource type="PackedScene" uid="uid://bdnptnmclj4uv" path="res://assets/scenes/enemy_template.tscn" id="4_hxffb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j4vt8"]
@@ -63,12 +62,11 @@ position = Vector2(0.166667, -0.333333)
 shape = SubResource("RectangleShape2D_va4iq")
 debug_color = Color(0, 0, 0, 0.419608)
 
-[node name="player_ui" parent="." instance=ExtResource("3_8wlmp")]
-
 [node name="Dummy" parent="." instance=ExtResource("4_hxffb")]
 position = Vector2(2156, 768)
 speed = 200
 damage = 5
+metadata/_edit_group_ = true
 
 [node name="NavigationAgent2D" parent="Dummy" index="7"]
 path_desired_distance = 75.99
@@ -76,15 +74,152 @@ path_max_distance = 20.0
 avoidance_enabled = true
 debug_use_custom = true
 
-[node name="Dummy2" parent="." instance=ExtResource("4_hxffb")]
-position = Vector2(2399, 769)
-speed = 200
-damage = 5
-
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 position = Vector2(-40, -171)
 navigation_polygon = SubResource("NavigationPolygon_nxbjw")
 navigation_layers = 9
 
+[node name="Dummy2" parent="." instance=ExtResource("4_hxffb")]
+position = Vector2(1986, 766)
+speed = 200
+damage = 5
+metadata/_edit_group_ = true
+
+[node name="NavigationAgent2D" parent="Dummy2" index="7"]
+path_desired_distance = 75.99
+path_max_distance = 20.0
+avoidance_enabled = true
+debug_use_custom = true
+
+[node name="Dummy3" parent="." instance=ExtResource("4_hxffb")]
+position = Vector2(2137, 603)
+speed = 200
+damage = 5
+metadata/_edit_group_ = true
+
+[node name="NavigationAgent2D" parent="Dummy3" index="7"]
+path_desired_distance = 75.99
+path_max_distance = 20.0
+avoidance_enabled = true
+debug_use_custom = true
+
+[node name="Dummy4" parent="." instance=ExtResource("4_hxffb")]
+position = Vector2(1978, 603)
+speed = 200
+damage = 5
+metadata/_edit_group_ = true
+
+[node name="NavigationAgent2D" parent="Dummy4" index="7"]
+path_desired_distance = 75.99
+path_max_distance = 20.0
+avoidance_enabled = true
+debug_use_custom = true
+
+[node name="Dummy5" parent="." instance=ExtResource("4_hxffb")]
+position = Vector2(2300, 766)
+speed = 200
+damage = 5
+metadata/_edit_group_ = true
+
+[node name="NavigationAgent2D" parent="Dummy5" index="7"]
+path_desired_distance = 75.99
+path_max_distance = 20.0
+avoidance_enabled = true
+debug_use_custom = true
+
+[node name="Dummy6" parent="." instance=ExtResource("4_hxffb")]
+position = Vector2(2296, 609)
+speed = 200
+damage = 5
+metadata/_edit_group_ = true
+
+[node name="NavigationAgent2D" parent="Dummy6" index="7"]
+path_desired_distance = 75.99
+path_max_distance = 20.0
+avoidance_enabled = true
+debug_use_custom = true
+
+[node name="Dummy7" parent="." instance=ExtResource("4_hxffb")]
+position = Vector2(1819, 766)
+speed = 200
+damage = 5
+metadata/_edit_group_ = true
+
+[node name="NavigationAgent2D" parent="Dummy7" index="7"]
+path_desired_distance = 75.99
+path_max_distance = 20.0
+avoidance_enabled = true
+debug_use_custom = true
+
+[node name="Dummy8" parent="." instance=ExtResource("4_hxffb")]
+position = Vector2(1821, 592)
+speed = 200
+damage = 5
+metadata/_edit_group_ = true
+
+[node name="NavigationAgent2D" parent="Dummy8" index="7"]
+path_desired_distance = 75.99
+path_max_distance = 20.0
+avoidance_enabled = true
+debug_use_custom = true
+
+[node name="Dummy9" parent="." instance=ExtResource("4_hxffb")]
+position = Vector2(1662, 770)
+speed = 200
+damage = 5
+metadata/_edit_group_ = true
+
+[node name="NavigationAgent2D" parent="Dummy9" index="7"]
+path_desired_distance = 75.99
+path_max_distance = 20.0
+avoidance_enabled = true
+debug_use_custom = true
+
+[node name="Dummy10" parent="." instance=ExtResource("4_hxffb")]
+position = Vector2(1647, 609)
+speed = 200
+damage = 5
+metadata/_edit_group_ = true
+
+[node name="NavigationAgent2D" parent="Dummy10" index="7"]
+path_desired_distance = 75.99
+path_max_distance = 20.0
+avoidance_enabled = true
+debug_use_custom = true
+
+[node name="Dummy11" parent="." instance=ExtResource("4_hxffb")]
+position = Vector2(1493, 766)
+speed = 200
+damage = 5
+metadata/_edit_group_ = true
+
+[node name="NavigationAgent2D" parent="Dummy11" index="7"]
+path_desired_distance = 75.99
+path_max_distance = 20.0
+avoidance_enabled = true
+debug_use_custom = true
+
+[node name="Dummy12" parent="." instance=ExtResource("4_hxffb")]
+position = Vector2(1491, 615)
+speed = 200
+damage = 5
+metadata/_edit_group_ = true
+
+[node name="NavigationAgent2D" parent="Dummy12" index="7"]
+path_desired_distance = 75.99
+path_max_distance = 20.0
+avoidance_enabled = true
+debug_use_custom = true
+
 [editable path="Dummy"]
 [editable path="Dummy2"]
+[editable path="Dummy3"]
+[editable path="Dummy4"]
+[editable path="Dummy5"]
+[editable path="Dummy6"]
+[editable path="Dummy7"]
+[editable path="Dummy8"]
+[editable path="Dummy9"]
+[editable path="Dummy10"]
+[editable path="Dummy11"]
+[editable path="Dummy12"]

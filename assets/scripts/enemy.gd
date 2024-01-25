@@ -35,6 +35,7 @@ func receiveDamage(amount, knock_direction : Vector2):
 	target_node = player
 	health -= amount
 	$HealthBar.value = health
+	$AudioStreamPlayer2D.pitch_scale = rng.randf_range(0.1, 2.0)
 	$AudioStreamPlayer2D.play()
 	$Dummy.modulate	= Color(1, 0.4, 0.4)
 	knockback(knock_direction)
@@ -87,11 +88,11 @@ func knockback(knok_direction):
 func _physics_process(delta):
 	if nav.is_navigation_finished():
 		return
-	
+
 	var axis = to_local(nav.get_next_path_position()).normalized()
 	velocity = axis*speed
 	move_and_slide()
-	
+
 
 	#var direction = Vector3()
 #

@@ -78,6 +78,8 @@ func set_scene(scene_name):
 			handle_scene_change(false, false)
 		"intro":
 			handle_scene_change(false, false)
+		"dead":
+			handle_scene_change(false, false)
 		_: #default
 			handle_scene_change(false, true)
 
@@ -137,6 +139,7 @@ func kill_player():
 func _damage_player(number):
 	Player_temp_data.hp -= number
 	if Player_temp_data.hp <= 0:
+		PlayerUi.set_hud_visible(false)
 		kill_player()
 
 func _enemy_killed():
