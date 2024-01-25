@@ -22,6 +22,7 @@ SceneTransition="*res://assets/scenes/scene_transition.tscn"
 Signal_Debugger="*res://addons/SignalVisualizer/Debugger/SignalDebugger.gd"
 Global="*res://assets/scripts/Global.gd"
 PlayerUi="*res://assets/scenes/player_ui.tscn"
+ShopMenu="*res://assets/scenes/shop_menu.tscn"
 
 [display]
 

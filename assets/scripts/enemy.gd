@@ -44,35 +44,31 @@ func _bleed(ticks,amount):
 		await get_tree().create_timer(1).timeout
 
 func die():
-	if(rng.randf_range(0,100) >= 75):
-		if(rng.randf_range(0,100) >= 25):
-			var size = Global.Items_to_obtain["rare"].size()-1
-			if size >= 0:
-				var rand = rng.randi_range(0,size)
-				var ItemToDrop = Global.Items_to_obtain["rare"][Global.Items_to_obtain["rare"].keys()[rand]]
-				Global.Items_to_obtain["rare"].erase(Global.All_items["rare"].find_key(ItemToDrop))
-				var ItemDropObject = preload("res://assets/scenes/dropped_item.tscn").instantiate()
-				ItemDropObject.position = self.position
-				ItemDropObject.get_child(0).texture = ItemToDrop.texture
-				ItemDropObject.itemToAdd = ItemToDrop
-				get_tree().get_root().get_node(".").add_child(ItemDropObject)
-		else:
-			
-			var size = Global.Items_to_obtain["common"].size()-1
-			if size >= 0:
-				var rand = rng.randi_range(0,size)
-				var ItemToDrop = Global.Items_to_obtain["common"][Global.Items_to_obtain["common"].keys()[rand]]
-				Global.Items_to_obtain["common"].erase(Global.All_items["common"].find_key(ItemToDrop))
-				var ItemDropObject = preload("res://assets/scenes/dropped_item.tscn").instantiate()
-				ItemDropObject.position = self.position
-				ItemDropObject.get_child(0).texture = ItemToDrop.texture
-				ItemDropObject.itemToAdd = ItemToDrop
-				get_tree().get_root().get_node(".").add_child(ItemDropObject)
 	$AnimationPlayer.play('ded')
 	await $AnimationPlayer.animation_finished
+	drop_item()
 	queue_free()
 	Global.enemy_killed.emit()
 	Global.coins_earned.emit(20)
+
+func drop_item():
+	var rarity
+	if(rng.randf_range(0,100) >= 75):
+		if(rng.randf_range(0,100) >= 25):
+			rarity = "rare"
+		else:
+			rarity = "common"
+
+		var size = Global.Items_to_obtain[rarity].size()-1
+		if size >= 0:
+			var rand = rng.randi_range(0,size)
+			var ItemToDrop = Global.Items_to_obtain[rarity][Global.Items_to_obtain[rarity].keys()[rand]]
+			Global.Items_to_obtain[rarity].erase(Global.All_items[rarity].find_key(ItemToDrop))
+			var ItemDropObject = preload("res://assets/scenes/dropped_item.tscn").instantiate()
+			ItemDropObject.position = self.position
+			ItemDropObject.get_child(0).texture = ItemToDrop.texture
+			ItemDropObject.itemToAdd = ItemToDrop
+			get_tree().get_root().get_node(".").add_child(ItemDropObject)
 
 func knockback(knok_direction):
 	knock_direction_physics = knok_direction

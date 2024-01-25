@@ -8,7 +8,7 @@ signal enemy_killed()
 signal coins_earned(number)
 signal add_item(Item)
 
-var All_items: Dictionary = {	
+var All_items: Dictionary = {
 	"common":{
 		0:preload("res://assets/Items/Cutting_board.tres"),
 		1:preload("res://assets/Items/Spoon.tres"),
@@ -19,12 +19,21 @@ var All_items: Dictionary = {
 		1:preload("res://assets/Items/Salt.tres"),
 		2:preload("res://assets/Items/Pepper.tres"),
 	},
-	
+
 
 }
 var Items_to_obtain:Dictionary = All_items
 
 var Player_Items:Array[Item]
+var Player_Perma_Items : Dictionary = {
+	"fork": {
+		"bought" = false,
+		"price" = 100,
+		"stats" = {
+			"attack_power" = 100
+		}
+	}
+}
 var Player_temp_data : Dictionary = {
 	"attack_power" = 10,
 	"attack_speed" = 1,
@@ -57,7 +66,9 @@ func set_scene(scene_name):
 		"lobby":
 			boss_fight = false
 			show_hud = false
+			reset_buffs()
 			PlayerUi.set_hud_visible(false)
+			print("test")
 		"intro":
 			boss_fight = false
 			show_hud = false
@@ -66,6 +77,36 @@ func set_scene(scene_name):
 			boss_fight = false
 			show_hud = true
 			PlayerUi.set_hud_visible(true)
+
+
+func reset_buffs():
+	Player_temp_data = {
+		"attack_power" = 10,
+		"attack_speed" = 1,
+		"movement_speed" = 400,
+		"hp" = 100,
+		"max_hp" = 100,
+		"is_dead" = false,
+		"enemy_kills_per_run" = 0,
+		"powerups" = {
+			"multishot":1,
+			"lifesteal":0,
+			"bleeding":0
+		}}
+	for item in Player_Perma_Items:
+		if Player_Perma_Items[item]["bought"] == true:
+			for stat in Player_Perma_Items[item]["stats"]:
+				Player_temp_data[stat] += Player_Perma_Items[item]["stats"][stat]
+
+func buy_item(name):
+	if Player_data["coins"] >= Player_Perma_Items[name]["price"]:
+		Player_data["coins"] -= Player_Perma_Items[name]["price"]
+		Player_Perma_Items[name]["bought"] = true
+		reset_buffs()
+		Global.refresh_stats.emit()
+		return true
+	else:
+		return false
 
 
 func refresh_hud():
