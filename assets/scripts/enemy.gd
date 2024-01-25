@@ -8,6 +8,9 @@ var health = max_health
 @export var attack_player = false
 @export var damage = 1
 
+var target_node = null
+var home_pos = Vector2.ZERO
+
 var rng = RandomNumberGenerator.new()
 
 @onready var nav : NavigationAgent2D = $NavigationAgent2D
@@ -17,6 +20,9 @@ var knockbacked : bool = false
 var knock_direction_physics : Vector2 = Vector2()
 
 func _ready():
+	home_pos = self.global_position
+	nav.path_desired_distance = 8
+	nav.target_desired_distance = 8
 	$HealthBar.max_value = max_health
 	$HealthBar.value = health
 	set_physics_process(false)
@@ -26,6 +32,7 @@ func _ready():
 	$Hitbox.body_exited.connect(OnBodyExited)
 
 func receiveDamage(amount, knock_direction : Vector2):
+	target_node = player
 	health -= amount
 	$HealthBar.value = health
 	$AudioStreamPlayer2D.play()
@@ -53,7 +60,7 @@ func die():
 
 func drop_item():
 	var rarity
-	if(rng.randf_range(0,100) >= 75):
+	if(rng.randf_range(0,100) >= 25):
 		if(rng.randf_range(0,100) >= 25):
 			rarity = "rare"
 		else:
@@ -78,20 +85,33 @@ func knockback(knok_direction):
 	knockbacked = false
 
 func _physics_process(delta):
-	var direction = Vector3()
+	if nav.is_navigation_finished():
+		return
+	
+	var axis = to_local(nav.get_next_path_position()).normalized()
+	velocity = axis*speed
+	move_and_slide()
+	
 
-	if is_instance_valid(player):
+	#var direction = Vector3()
+#
+	#if is_instance_valid(player):
+#
+		#nav.target_position = player.position
+		#direction = nav.get_next_path_position() - global_position
+		#direction = direction.normalized()
+		#if knockbacked:
+			#direction = knock_direction_physics * 10
+#
+		#velocity = velocity.lerp(direction * speed, accel * delta)
+#
+		#move_and_slide()
 
-		nav.target_position = player.position
-		direction = nav.get_next_path_position() - global_position
-		direction = direction.normalized()
-		if knockbacked:
-			direction = knock_direction_physics * 10
-
-		velocity = velocity.lerp(direction * speed, accel * delta)
-
-		move_and_slide()
-
+func recalc_path():
+	if target_node:
+		nav.target_position = target_node.global_position
+	else:
+		nav.target_position = home_pos
 
 func OnBodyEntered(body):
 	if (body.name == "Player"):
@@ -103,3 +123,14 @@ func OnBodyEntered(body):
 func OnBodyExited(body):
 	if (body.name == "Player"):
 		attack_player = false
+
+
+func _on_recalculate_timer_timeout():
+	recalc_path()
+
+func _on_area_2d_area_entered(area):
+	target_node = player
+
+func _on_area_2d_area_exited(area):
+	target_node = null
+

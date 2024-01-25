@@ -28,8 +28,8 @@ var All_items: Dictionary = {
 		4:preload("res://assets/Items/Chopper.tres")
 	},
 }
-var Items_to_obtain:Dictionary = All_items
-
+var Items_backup = All_items.duplicate(true)
+var Items_to_obtain:Dictionary = All_items.duplicate(true)
 var Player_Items:Array[Item]
 var Player_Perma_Items : Dictionary = {
 	"fork": {
@@ -88,7 +88,7 @@ func handle_scene_change(temp_boss_fight, hud):
 
 func reset_buffs():
 	Player_temp_data = {
-		"attack_power" = 10,
+		"attack_power" = 100,
 		"attack_speed" = 1,
 		"movement_speed" = 400,
 		"hp" = 100,
@@ -100,6 +100,8 @@ func reset_buffs():
 			"lifesteal":0,
 			"bleeding":0
 		}}
+	All_items = Items_backup.duplicate(true)
+	Items_to_obtain = Dictionary(All_items)
 	for item in Player_Perma_Items:
 		if Player_Perma_Items[item]["bought"] == true:
 			for stat in Player_Perma_Items[item]["stats"]:
@@ -153,7 +155,6 @@ func _ready():
 	pass
 
 func _add_item(item:Item):
-	Player_Items.append(item)
 	#Nie ma sensu chyba robic osobnej funkcji od update_stats() wiec zrobie to tu :p
 	for upgrade in item.statUpgrades:
 		match upgrade:

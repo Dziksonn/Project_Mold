@@ -1,99 +1,25 @@
-[gd_scene load_steps=12 format=3 uid="uid://dshvqllunky3c"]
+[gd_scene load_steps=8 format=3 uid="uid://dshvqllunky3c"]
 
-[ext_resource type="Texture2D" uid="uid://dpsb78xf1ve2s" path="res://assets/art/Floor-SpriteSheet.png" id="1_3n7am"]
-[ext_resource type="Texture2D" uid="uid://m525qerujnve" path="res://assets/art/Transparent-SpriteSheet.png" id="2_88th6"]
+[ext_resource type="TileSet" uid="uid://cygjk1hisdaic" path="res://assets/scenes/restuarant_tileset.tres" id="1_bkr6r"]
 [ext_resource type="PackedScene" uid="uid://dh4s221kgtc83" path="res://assets/scenes/player.tscn" id="2_jfxeh"]
 [ext_resource type="PackedScene" uid="uid://bptxe5n601tay" path="res://assets/scenes/drzwi.tscn" id="4_tluvb"]
 [ext_resource type="PackedScene" uid="uid://brwg7duxb6wkr" path="res://assets/scenes/menu.tscn" id="5_8c2hh"]
 [ext_resource type="PackedScene" uid="uid://bdnptnmclj4uv" path="res://assets/scenes/enemy_template.tscn" id="6_bo7gb"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tuhjx"]
-resource_name = "Floor"
-texture = ExtResource("1_3n7am")
-margins = Vector2i(4, 4)
-separation = Vector2i(6, 6)
-0:0/0 = 0
-1:0/0 = 0
-2:0/0 = 0
-3:0/0 = 0
-4:0/0 = 0
-5:0/0 = 0
-6:0/0 = 0
-6:1/0 = 0
-5:1/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-2:1/0 = 0
-3:1/0 = 0
-4:1/0 = 0
-0:2/0 = 0
-0:3/0 = 0
-0:4/0 = 0
-0:5/0 = 0
-1:2/0 = 0
-1:3/0 = 0
-1:4/0 = 0
-1:5/0 = 0
-2:2/0 = 0
-2:3/0 = 0
-2:4/0 = 0
-2:5/0 = 0
-3:2/0 = 0
-3:3/0 = 0
-3:4/0 = 0
-3:5/0 = 0
-4:2/0 = 0
-4:3/0 = 0
-4:4/0 = 0
-4:5/0 = 0
-5:2/0 = 0
-5:3/0 = 0
-5:4/0 = 0
-5:5/0 = 0
-6:2/0 = 0
-6:3/0 = 0
-6:4/0 = 0
-6:5/0 = 0
-0:6/0 = 0
-1:6/0 = 0
-2:6/0 = 0
-3:6/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_asrq4"]
-texture = ExtResource("2_88th6")
-margins = Vector2i(4, 4)
-separation = Vector2i(6, 6)
-0:1/0 = 0
-0:0/0 = 0
-1:0/0 = 0
-1:1/0 = 0
-2:0/0 = 0
-2:1/0 = 0
-1:2/0 = 0
-3:2/0 = 0
-3:1/0 = 0
-3:0/0 = 0
-1:3/0 = 0
-0:3/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_gsvsp"]
-sources/0 = SubResource("TileSetAtlasSource_tuhjx")
-sources/1 = SubResource("TileSetAtlasSource_asrq4")
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mw5xd"]
 size = Vector2(24.3333, 5.99998)
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_sh7j0"]
-vertices = PackedVector2Array(3510, 2870, -182, 2870, -182, 1610, 3510, 1610)
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_6g4wr"]
+vertices = PackedVector2Array(6175, 3006, -785, 3133, -946, -2462, 6120, -2517)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-192, 1600, 3520, 1600, 3520, 2880, -192, 2880)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-794.568, 3144, 6186.28, 3016, 6129.52, -2528, -956.724, -2472)])
 source_geometry_group_name = &"navigation_polygon_source_group"
 
 [node name="PizzaRestaurant" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
 scale = Vector2(8, 8)
-tile_set = SubResource("TileSet_gsvsp")
+tile_set = ExtResource("1_bkr6r")
 format = 2
 layer_0/name = "Floor"
 layer_0/z_index = -1
@@ -111,7 +37,7 @@ polygon = PackedVector2Array(-24, -56, 296, -56, 296, -136, 344, -136, 344, -184
 [node name="Player" parent="." instance=ExtResource("2_jfxeh")]
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(0.82, 0.82)
+zoom = Vector2(0.8, 0.8)
 limit_smoothed = true
 
 [node name="PlayerDetector" type="Area2D" parent="Player"]
@@ -128,275 +54,79 @@ position = Vector2(4728, -2008)
 metadata/direction = "up"
 metadata/Scene = ExtResource("5_8c2hh")
 
-[node name="pokoj_dol" type="Node2D" parent="."]
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+navigation_polygon = SubResource("NavigationPolygon_6g4wr")
+navigation_layers = 9
 
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="pokoj_dol"]
-navigation_polygon = SubResource("NavigationPolygon_sh7j0")
-navigation_layers = 65535
+[node name="CharacterBody2D" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(3904, -24)
 
-[node name="CharacterBody2D" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(-96, 2208)
+[node name="CharacterBody2D2" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(4136, -16)
 
-[node name="CharacterBody2D2" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(-96, 2040)
+[node name="CharacterBody2D3" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(3912, -216)
 
-[node name="CharacterBody2D3" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(72, 2216)
+[node name="CharacterBody2D4" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(4144, -200)
 
-[node name="CharacterBody2D4" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(72, 2040)
+[node name="CharacterBody2D5" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(3904, 192)
 
-[node name="CharacterBody2D5" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(240, 2211)
+[node name="CharacterBody2D6" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(4144, 192)
 
-[node name="CharacterBody2D6" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(240, 2043)
+[node name="CharacterBody2D7" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(578, -1906)
 
-[node name="CharacterBody2D7" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(408, 2219)
+[node name="CharacterBody2D8" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(583, -1493)
 
-[node name="CharacterBody2D8" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(408, 2043)
+[node name="CharacterBody2D9" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(1054, -1488)
 
-[node name="CharacterBody2D9" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(240, 1880)
+[node name="CharacterBody2D10" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(1437, -1843)
 
-[node name="CharacterBody2D10" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(240, 1712)
+[node name="CharacterBody2D11" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(1676, -1359)
 
-[node name="CharacterBody2D11" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(408, 1888)
+[node name="CharacterBody2D12" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(3105, -1316)
 
-[node name="CharacterBody2D12" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(408, 1712)
+[node name="CharacterBody2D13" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(3110, 1533)
 
-[node name="CharacterBody2D13" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(-96, 1880)
+[node name="CharacterBody2D14" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(2337, 2310)
 
-[node name="CharacterBody2D14" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(-96, 1712)
+[node name="CharacterBody2D15" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(931, 1864)
 
-[node name="CharacterBody2D15" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(72, 1888)
+[node name="CharacterBody2D16" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(376, 2718)
 
-[node name="CharacterBody2D16" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(72, 1712)
+[node name="CharacterBody2D17" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(1339, 2486)
 
-[node name="CharacterBody2D17" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(568, 2211)
+[node name="CharacterBody2D18" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(2992, 2519)
 
-[node name="CharacterBody2D18" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(568, 2043)
+[node name="CharacterBody2D19" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(1724, 1922)
 
-[node name="CharacterBody2D19" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(736, 2219)
+[node name="CharacterBody2D21" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(4894, -982)
 
-[node name="CharacterBody2D20" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(736, 2043)
+[node name="CharacterBody2D22" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(5065, -822)
 
-[node name="CharacterBody2D21" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(904, 2214)
+[node name="CharacterBody2D23" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(5297, -792)
 
-[node name="CharacterBody2D22" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(904, 2046)
-
-[node name="CharacterBody2D23" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(1072, 2222)
-
-[node name="CharacterBody2D24" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(1072, 2046)
-
-[node name="CharacterBody2D25" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(904, 1883)
-
-[node name="CharacterBody2D26" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(904, 1715)
-
-[node name="CharacterBody2D27" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(1072, 1891)
-
-[node name="CharacterBody2D28" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(1072, 1715)
-
-[node name="CharacterBody2D29" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(568, 1883)
-
-[node name="CharacterBody2D30" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(568, 1715)
-
-[node name="CharacterBody2D31" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(736, 1891)
-
-[node name="CharacterBody2D32" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(736, 1715)
-
-[node name="CharacterBody2D33" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(1240, 2214)
-
-[node name="CharacterBody2D34" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(1240, 2046)
-
-[node name="CharacterBody2D35" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(1408, 2222)
-
-[node name="CharacterBody2D36" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(1408, 2046)
-
-[node name="CharacterBody2D37" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(1576, 2217)
-
-[node name="CharacterBody2D38" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(1576, 2049)
-
-[node name="CharacterBody2D39" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(1744, 2225)
-
-[node name="CharacterBody2D40" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(1744, 2049)
-
-[node name="CharacterBody2D41" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(1576, 1886)
-
-[node name="CharacterBody2D42" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(1576, 1718)
-
-[node name="CharacterBody2D43" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(1744, 1894)
-
-[node name="CharacterBody2D44" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(1744, 1718)
-
-[node name="CharacterBody2D45" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(1240, 1886)
-
-[node name="CharacterBody2D46" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(1240, 1718)
-
-[node name="CharacterBody2D47" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(1408, 1894)
-
-[node name="CharacterBody2D48" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(1408, 1718)
-
-[node name="CharacterBody2D81" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(1896, 2224)
-
-[node name="CharacterBody2D82" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(1896, 2056)
-
-[node name="CharacterBody2D83" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(2064, 2232)
-
-[node name="CharacterBody2D84" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(2064, 2056)
-
-[node name="CharacterBody2D85" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(2232, 2227)
-
-[node name="CharacterBody2D86" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(2232, 2059)
-
-[node name="CharacterBody2D87" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(2400, 2235)
-
-[node name="CharacterBody2D88" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(2400, 2059)
-
-[node name="CharacterBody2D89" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(2232, 1896)
-
-[node name="CharacterBody2D90" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(2232, 1728)
-
-[node name="CharacterBody2D91" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(2400, 1904)
-
-[node name="CharacterBody2D92" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(2400, 1728)
-
-[node name="CharacterBody2D93" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(1896, 1896)
-
-[node name="CharacterBody2D94" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(1896, 1728)
-
-[node name="CharacterBody2D95" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(2064, 1904)
-
-[node name="CharacterBody2D96" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(2064, 1728)
-
-[node name="CharacterBody2D97" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(2560, 2227)
-
-[node name="CharacterBody2D98" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(2560, 2059)
-
-[node name="CharacterBody2D99" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(2728, 2235)
-
-[node name="CharacterBody2D100" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(2728, 2059)
-
-[node name="CharacterBody2D101" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(2896, 2230)
-
-[node name="CharacterBody2D102" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(2896, 2062)
-
-[node name="CharacterBody2D103" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(3064, 2238)
-
-[node name="CharacterBody2D104" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(3064, 2062)
-
-[node name="CharacterBody2D105" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(2896, 1899)
-
-[node name="CharacterBody2D106" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(2896, 1731)
-
-[node name="CharacterBody2D107" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(3064, 1907)
-
-[node name="CharacterBody2D108" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(3064, 1731)
-
-[node name="CharacterBody2D109" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(2560, 1899)
-
-[node name="CharacterBody2D110" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(2560, 1731)
-
-[node name="CharacterBody2D111" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(2728, 1907)
-
-[node name="CharacterBody2D112" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(2728, 1731)
-
-[node name="CharacterBody2D145" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(3232, 2230)
-
-[node name="CharacterBody2D146" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(3232, 2062)
-
-[node name="CharacterBody2D147" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(3400, 2238)
-
-[node name="CharacterBody2D148" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(3400, 2062)
-
-[node name="CharacterBody2D157" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(3232, 1902)
-
-[node name="CharacterBody2D158" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(3232, 1734)
-
-[node name="CharacterBody2D159" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(3400, 1910)
-
-[node name="CharacterBody2D160" parent="pokoj_dol" instance=ExtResource("6_bo7gb")]
-position = Vector2(3400, 1734)
+[node name="CharacterBody2D24" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(5439, -977)
 
 [connection signal="area_entered" from="Player/PlayerDetector" to="Player" method="_on_player_detector_area_entered"]
 

@@ -285,8 +285,8 @@ _data = {
 "attack": SubResource("Animation_iuo7q")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qgisa"]
-size = Vector2(22.6667, 78.3333)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ct7tr"]
+height = 82.3333
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jky14"]
 size = Vector2(95.1667, 132)
@@ -347,7 +347,7 @@ libraries = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(3.57628e-07, 1.83333)
-shape = SubResource("RectangleShape2D_qgisa")
+shape = SubResource("CapsuleShape2D_ct7tr")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3

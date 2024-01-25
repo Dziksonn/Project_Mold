@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bhfwj0h4o8usw" path="res://assets/art/lobby.png" id="2_jodbr"]
 [ext_resource type="PackedScene" uid="uid://bptxe5n601tay" path="res://assets/scenes/drzwi.tscn" id="3_ov6w6"]
 [ext_resource type="PackedScene" uid="uid://csfjlw13h66h6" path="res://assets/scenes/debug_bg_scene.tscn" id="4_51jbe"]
-[ext_resource type="PackedScene" uid="uid://dshvqllunky3c" path="res://assets/scenes/PizzaRestaurantStage1.tscn" id="5_u3ai4"]
+[ext_resource type="PackedScene" uid="uid://i5c8tomtxio3" path="res://assets/scenes/PizzaRestaurantStage2.tscn" id="5_u3ai4"]
 [ext_resource type="Script" path="res://assets/scripts/shop.gd" id="6_xnblg"]
 [ext_resource type="Texture2D" uid="uid://cx6egoy1bqpom" path="res://assets/art/shop.png" id="7_y6cno"]
 
