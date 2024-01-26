@@ -61,7 +61,7 @@ func die():
 
 func drop_item():
 	var rarity
-	if(rng.randf_range(0,100) >= 25):
+	if(rng.randf_range(0,100) >= 10):
 		if(rng.randf_range(0,100) >= 25):
 			rarity = "rare"
 		else:
@@ -132,6 +132,5 @@ func _on_recalculate_timer_timeout():
 func _on_area_2d_area_entered(area):
 	target_node = player
 
-func _on_area_2d_area_exited(area):
-	target_node = null
-
+# func _on_area_2d_area_exited(area):
+# 	target_node = null

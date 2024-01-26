@@ -134,7 +134,7 @@ func attack():
 		var Damage = rng.randi_range(attackpower-5,attackpower+5)
 		enemy.get_parent().receiveDamage(Damage,knockbackVector)
 		if Global.Player_temp_data["powerups"]["bleeding"] > 0:
-			enemy.get_parent()._bleed(Global.Player_temp_data["powerups"]["bleeding"],Damage*2/Global.Player_temp_data["powerups"]["bleeding"])
+			enemy.get_parent()._bleed(Global.Player_temp_data["powerups"]["bleeding"],Damage/Global.Player_temp_data["powerups"]["bleeding"])
 
 	$Sprite2D/KnifeAnimation.play_backwards("attack")
 	await $Sprite2D/KnifeAnimation.animation_finished
