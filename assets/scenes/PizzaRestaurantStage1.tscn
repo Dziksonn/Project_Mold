@@ -2,8 +2,8 @@
 
 [ext_resource type="TileSet" uid="uid://cygjk1hisdaic" path="res://assets/scenes/restuarant_tileset.tres" id="1_bkr6r"]
 [ext_resource type="PackedScene" uid="uid://dh4s221kgtc83" path="res://assets/scenes/player.tscn" id="2_jfxeh"]
-[ext_resource type="PackedScene" uid="uid://fudacns2hhxc" path="res://assets/scenes/lobby.tscn" id="4_jrjgo"]
 [ext_resource type="PackedScene" uid="uid://bptxe5n601tay" path="res://assets/scenes/drzwi.tscn" id="4_tluvb"]
+[ext_resource type="PackedScene" uid="uid://brwg7duxb6wkr" path="res://assets/scenes/menu.tscn" id="5_8c2hh"]
 [ext_resource type="PackedScene" uid="uid://bdnptnmclj4uv" path="res://assets/scenes/enemy_template.tscn" id="6_bo7gb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mw5xd"]
@@ -52,83 +52,81 @@ debug_color = Color(0, 0, 0, 0.419608)
 z_index = -1
 position = Vector2(4728, -2008)
 metadata/direction = "up"
-metadata/Scene = ExtResource("4_jrjgo")
+metadata/Scene = ExtResource("5_8c2hh")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 modulate = Color(1, 1, 1, 0)
 navigation_polygon = SubResource("NavigationPolygon_6g4wr")
 navigation_layers = 9
 
-[node name="enemies" type="Node2D" parent="."]
-
-[node name="CharacterBody2D24" parent="enemies" instance=ExtResource("6_bo7gb")]
-position = Vector2(5439, -977)
-
-[node name="CharacterBody2D23" parent="enemies" instance=ExtResource("6_bo7gb")]
-position = Vector2(5297, -792)
-
-[node name="CharacterBody2D22" parent="enemies" instance=ExtResource("6_bo7gb")]
-position = Vector2(5065, -822)
-
-[node name="CharacterBody2D21" parent="enemies" instance=ExtResource("6_bo7gb")]
-position = Vector2(4894, -982)
-
-[node name="CharacterBody2D19" parent="enemies" instance=ExtResource("6_bo7gb")]
-position = Vector2(1724, 1922)
-
-[node name="CharacterBody2D18" parent="enemies" instance=ExtResource("6_bo7gb")]
-position = Vector2(2992, 2519)
-
-[node name="CharacterBody2D17" parent="enemies" instance=ExtResource("6_bo7gb")]
-position = Vector2(1339, 2486)
-
-[node name="CharacterBody2D16" parent="enemies" instance=ExtResource("6_bo7gb")]
-position = Vector2(376, 2718)
-
-[node name="CharacterBody2D15" parent="enemies" instance=ExtResource("6_bo7gb")]
-position = Vector2(931, 1864)
-
-[node name="CharacterBody2D14" parent="enemies" instance=ExtResource("6_bo7gb")]
-position = Vector2(2337, 2310)
-
-[node name="CharacterBody2D9" parent="enemies" instance=ExtResource("6_bo7gb")]
-position = Vector2(1054, -1488)
-
-[node name="CharacterBody2D10" parent="enemies" instance=ExtResource("6_bo7gb")]
-position = Vector2(1437, -1843)
-
-[node name="CharacterBody2D11" parent="enemies" instance=ExtResource("6_bo7gb")]
-position = Vector2(1676, -1359)
-
-[node name="CharacterBody2D12" parent="enemies" instance=ExtResource("6_bo7gb")]
-position = Vector2(3105, -1316)
-
-[node name="CharacterBody2D13" parent="enemies" instance=ExtResource("6_bo7gb")]
-position = Vector2(3110, 1533)
-
-[node name="CharacterBody2D" parent="enemies" instance=ExtResource("6_bo7gb")]
+[node name="CharacterBody2D" parent="." instance=ExtResource("6_bo7gb")]
 position = Vector2(3904, -24)
 
-[node name="CharacterBody2D2" parent="enemies" instance=ExtResource("6_bo7gb")]
+[node name="CharacterBody2D2" parent="." instance=ExtResource("6_bo7gb")]
 position = Vector2(4136, -16)
 
-[node name="CharacterBody2D3" parent="enemies" instance=ExtResource("6_bo7gb")]
+[node name="CharacterBody2D3" parent="." instance=ExtResource("6_bo7gb")]
 position = Vector2(3912, -216)
 
-[node name="CharacterBody2D4" parent="enemies" instance=ExtResource("6_bo7gb")]
+[node name="CharacterBody2D4" parent="." instance=ExtResource("6_bo7gb")]
 position = Vector2(4144, -200)
 
-[node name="CharacterBody2D5" parent="enemies" instance=ExtResource("6_bo7gb")]
+[node name="CharacterBody2D5" parent="." instance=ExtResource("6_bo7gb")]
 position = Vector2(3904, 192)
 
-[node name="CharacterBody2D6" parent="enemies" instance=ExtResource("6_bo7gb")]
+[node name="CharacterBody2D6" parent="." instance=ExtResource("6_bo7gb")]
 position = Vector2(4144, 192)
 
-[node name="CharacterBody2D7" parent="enemies" instance=ExtResource("6_bo7gb")]
+[node name="CharacterBody2D7" parent="." instance=ExtResource("6_bo7gb")]
 position = Vector2(578, -1906)
 
-[node name="CharacterBody2D8" parent="enemies" instance=ExtResource("6_bo7gb")]
+[node name="CharacterBody2D8" parent="." instance=ExtResource("6_bo7gb")]
 position = Vector2(583, -1493)
+
+[node name="CharacterBody2D9" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(1054, -1488)
+
+[node name="CharacterBody2D10" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(1437, -1843)
+
+[node name="CharacterBody2D11" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(1676, -1359)
+
+[node name="CharacterBody2D12" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(3105, -1316)
+
+[node name="CharacterBody2D13" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(3110, 1533)
+
+[node name="CharacterBody2D14" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(2337, 2310)
+
+[node name="CharacterBody2D15" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(931, 1864)
+
+[node name="CharacterBody2D16" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(376, 2718)
+
+[node name="CharacterBody2D17" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(1339, 2486)
+
+[node name="CharacterBody2D18" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(2992, 2519)
+
+[node name="CharacterBody2D19" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(1724, 1922)
+
+[node name="CharacterBody2D21" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(4894, -982)
+
+[node name="CharacterBody2D22" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(5065, -822)
+
+[node name="CharacterBody2D23" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(5297, -792)
+
+[node name="CharacterBody2D24" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(5439, -977)
 
 [connection signal="area_entered" from="Player/PlayerDetector" to="Player" method="_on_player_detector_area_entered"]
 
