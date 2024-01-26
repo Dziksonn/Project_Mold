@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://fudacns2hhxc"]
+[gd_scene load_steps=14 format=3 uid="uid://fudacns2hhxc"]
 
 [ext_resource type="PackedScene" uid="uid://dh4s221kgtc83" path="res://assets/scenes/player.tscn" id="1_dl7al"]
 [ext_resource type="Texture2D" uid="uid://bhfwj0h4o8usw" path="res://assets/art/lobby.png" id="2_jodbr"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://i5c8tomtxio3" path="res://assets/scenes/PizzaRestaurantStage2.tscn" id="5_u3ai4"]
 [ext_resource type="Script" path="res://assets/scripts/shop.gd" id="6_xnblg"]
 [ext_resource type="Texture2D" uid="uid://cx6egoy1bqpom" path="res://assets/art/shop.png" id="7_y6cno"]
+[ext_resource type="FontFile" uid="uid://ciwxw5qfslmqf" path="res://assets/fonts/PixeloidSans-mLxMm.ttf" id="8_wqpib"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cmtqn"]
 size = Vector2(24.3333, 5.99998)
@@ -117,6 +118,36 @@ texture = ExtResource("7_y6cno")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sklep"]
 position = Vector2(531, 474)
 shape = SubResource("RectangleShape2D_itq6h")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 31.0
+offset_top = 50.0
+offset_right = 856.0
+offset_bottom = 165.0
+color = Color(0.0901961, 0.0901961, 0.0901961, 1)
+metadata/_edit_group_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 23.0
+offset_right = 765.0
+offset_bottom = 106.0
+theme_override_fonts/normal_font = ExtResource("8_wqpib")
+theme_override_font_sizes/normal_font_size = 36
+text = "To use door or shop, just run into it"
+fit_content = true
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="ColorRect"]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 73.0
+offset_right = 444.0
+offset_bottom = 109.0
+theme_override_fonts/normal_font = ExtResource("8_wqpib")
+theme_override_font_sizes/normal_font_size = 16
+text = "PS. This version include cheat menu under `"
+fit_content = true
 
 [connection signal="area_entered" from="Player/PlayerDetector" to="Player" method="_on_player_detector_area_entered"]
 [connection signal="area_entered" from="Sklep" to="Sklep" method="_on_area_entered"]

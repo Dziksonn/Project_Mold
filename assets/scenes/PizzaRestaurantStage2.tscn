@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://i5c8tomtxio3"]
+[gd_scene load_steps=9 format=3 uid="uid://i5c8tomtxio3"]
 
 [ext_resource type="TileSet" uid="uid://cygjk1hisdaic" path="res://assets/scenes/restuarant_tileset.tres" id="1_bkr6r"]
 [ext_resource type="PackedScene" uid="uid://dh4s221kgtc83" path="res://assets/scenes/player.tscn" id="2_jfxeh"]
 [ext_resource type="PackedScene" uid="uid://bptxe5n601tay" path="res://assets/scenes/drzwi.tscn" id="4_tluvb"]
 [ext_resource type="PackedScene" uid="uid://dshvqllunky3c" path="res://assets/scenes/PizzaRestaurantStage1.tscn" id="5_h484c"]
 [ext_resource type="PackedScene" uid="uid://bdnptnmclj4uv" path="res://assets/scenes/enemy_template.tscn" id="6_bo7gb"]
+[ext_resource type="FontFile" uid="uid://ciwxw5qfslmqf" path="res://assets/fonts/PixeloidSans-mLxMm.ttf" id="6_lug2a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kwsop"]
 size = Vector2(24.3333, 5.99998)
@@ -102,6 +103,25 @@ position = Vector2(10271, 465)
 position = Vector2(6864, -968)
 metadata/direction = "up"
 metadata/Scene = ExtResource("5_h484c")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -360.0
+offset_top = -163.0
+offset_right = 465.0
+offset_bottom = -48.0
+color = Color(0.0901961, 0.0901961, 0.0901961, 1)
+metadata/_edit_group_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 38.0
+offset_right = 810.0
+offset_bottom = 106.0
+theme_override_fonts/normal_font = ExtResource("6_lug2a")
+theme_override_font_sizes/normal_font_size = 36
+text = "Use mouse left and right click to attack"
+fit_content = true
 
 [connection signal="area_entered" from="Player/PlayerDetector" to="Player" method="_on_player_detector_area_entered"]
 

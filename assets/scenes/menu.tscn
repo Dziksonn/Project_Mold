@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://brwg7duxb6wkr"]
+[gd_scene load_steps=14 format=3 uid="uid://brwg7duxb6wkr"]
 
 [ext_resource type="PackedScene" uid="uid://dh4s221kgtc83" path="res://assets/scenes/player.tscn" id="1_ir8m2"]
 [ext_resource type="Script" path="res://assets/scripts/menu.gd" id="1_sex5s"]
 [ext_resource type="Texture2D" uid="uid://uiaasl1heqvd" path="res://assets/art/menu_buttons.png" id="2_3jw7g"]
+[ext_resource type="FontFile" uid="uid://ciwxw5qfslmqf" path="res://assets/fonts/PixeloidSans-mLxMm.ttf" id="4_17c4r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xxo65"]
 size = Vector2(24.3333, 78)
@@ -138,6 +139,25 @@ collision_layer = 4
 position = Vector2(610.5, 377.5)
 shape = SubResource("RectangleShape2D_bpgxl")
 debug_color = Color(1, 0.0117647, 0.0156863, 0.419608)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 14.0
+offset_top = 15.0
+offset_right = 839.0
+offset_bottom = 130.0
+color = Color(0.0901961, 0.0901961, 0.0901961, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 11.0
+offset_right = 826.0
+offset_bottom = 163.0
+theme_override_fonts/normal_font = ExtResource("4_17c4r")
+theme_override_font_sizes/normal_font_size = 36
+text = "Use WSAD to move
+Hit button with your head to select option"
+fit_content = true
 
 [connection signal="area_entered" from="Player/PlayerDetector" to="buttons/start_button" method="_on_player_detector_area_entered"]
 [connection signal="area_entered" from="Player/PlayerDetector" to="buttons/options_button" method="_on_player_detector_area_entered"]
