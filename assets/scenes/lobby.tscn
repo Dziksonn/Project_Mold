@@ -146,7 +146,7 @@ offset_right = 444.0
 offset_bottom = 109.0
 theme_override_fonts/normal_font = ExtResource("8_wqpib")
 theme_override_font_sizes/normal_font_size = 16
-text = "PS. This version include cheat menu under `"
+text = "PS. This version includes cheat menu under `"
 fit_content = true
 
 [connection signal="area_entered" from="Player/PlayerDetector" to="Player" method="_on_player_detector_area_entered"]
