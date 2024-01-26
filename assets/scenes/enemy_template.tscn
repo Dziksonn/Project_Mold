@@ -162,6 +162,8 @@ radius = 1162.08
 collision_layer = 8
 collision_mask = 9
 script = ExtResource("1_gmd32")
+speed = 250
+accel = 10
 
 [node name="Dummy" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)

@@ -49,7 +49,7 @@ var Player_Perma_Items : Dictionary = {
 	}
 }
 var Player_temp_data : Dictionary = {
-	"attack_power" = 10,
+	"attack_power" = 15,
 	"attack_speed" = 1,
 	"movement_speed" = 400,
 	"hp" = 100,
@@ -90,7 +90,7 @@ func handle_scene_change(temp_boss_fight, hud):
 
 func reset_buffs():
 	Player_temp_data = {
-		"attack_power" = 100,
+		"attack_power" = 15,
 		"attack_speed" = 1,
 		"movement_speed" = 400,
 		"hp" = 100,
