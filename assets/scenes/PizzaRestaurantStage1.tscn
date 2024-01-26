@@ -18,6 +18,7 @@ source_geometry_group_name = &"navigation_polygon_source_group"
 [node name="PizzaRestaurant" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
+modulate = Color(0.6, 0.0117647, 0.0862745, 0.207843)
 scale = Vector2(8, 8)
 tile_set = ExtResource("1_bkr6r")
 format = 2

@@ -14,6 +14,7 @@ func _process(_delta):
 func _on_area_entered(area:Area2D):
 	if area.name == "PlayerDetector":
 		shop_state(true)
+		$Sprite2D.frame = 1
 
 
 func shop_state(state):
@@ -23,3 +24,4 @@ func shop_state(state):
 func _on_area_exited(area:Area2D):
 	if area.name == "PlayerDetector":
 		shop_state(false)
+		$Sprite2D.frame = 0

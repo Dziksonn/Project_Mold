@@ -11,15 +11,14 @@
 size = Vector2(24.3333, 5.99998)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_a4prp"]
-vertices = PackedVector2Array(6130, 430, 4370, 430, 4370, -30, 6670, -30, 6670, 3470, 6130, 2770, 50, 3470, 830, 2770, 50, 1410, 830, 2030, 3250, 1410, 3950, 2030, 3950, -270, 3250, 430, -270, -270, -270, 430)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(0, 3, 4, 5), PackedInt32Array(5, 4, 6, 7), PackedInt32Array(7, 6, 8, 9), PackedInt32Array(9, 8, 10, 11), PackedInt32Array(12, 11, 10, 13), PackedInt32Array(14, 12, 13, 15)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-280, -280, 3960, -280, 3960, 2040, 840, 2040, 840, 2760, 6120, 2760, 6120, 440, 4360, 440, 4360, -40, 6680, -40, 6680, 3480, 40, 3480, 40, 1400, 3240, 1400, 3240, 440, -280, 440)])
+vertices = PackedVector2Array(11015, 6920, -403, 6987, -855, -1489, 11184, -1511)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-413, 6998, 11025, 6930, 11195, -1522, -866, -1499)])
 source_geometry_group_name = &"navigation_polygon_source_group"
 
 [node name="PizzaRestaurantStage2" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
-modulate = Color(0.6, 0.0117647, 0.0862745, 0.207843)
 scale = Vector2(5, 5)
 tile_set = ExtResource("1_bkr6r")
 format = 2
@@ -31,7 +30,8 @@ collision_layer = 2
 collision_mask = 15
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TileMap/Walls"]
-polygon = PackedVector2Array(-448, -448, 6336, -448, 6336, 3264, 1344, 3264, 1344, 4416, 9792, 4416, 9792, 704, 6976, 704, 6976, -64, 7216, -65.6, 7214.4, -393.6, 7457.6, -395.2, 7456, -65.6, 10688, -64, 10688, 5568, 64, 5568, 64, 2240, 5184, 2240, 5184, 704, -448, 704, -448, -448, -1035, -1563, -1304, 6632, 12808, 7304, 13352, -1888, -1336, -1640)
+modulate = Color(1, 1, 1, 0.219608)
+polygon = PackedVector2Array(-448, -448, 6336, -448, 6336, 3264, 1344, 3264, 1344, 4416, 9792, 4416, 9792, 704, 6976, 704, 6976, -64, 7232, -64, 7232, -312, 7384, -312, 7384, -64, 10688, -64, 10688, 5568, 64, 5568, 64, 2240, 5184, 2240, 5184, 704, -448, 704, -448, -448, -1035, -1563, -1304, 6632, 12808, 7304, 13352, -1888, -1336, -1640)
 
 [node name="Player" parent="." instance=ExtResource("2_jfxeh")]
 position = Vector2(397, 112)
@@ -52,140 +52,58 @@ visible = false
 navigation_polygon = SubResource("NavigationPolygon_a4prp")
 navigation_layers = 9
 
+[node name="CharacterBody2D" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(427, 2579)
+
+[node name="CharacterBody2D2" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(1396, 2620)
+
+[node name="CharacterBody2D3" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(420, 3353)
+
+[node name="CharacterBody2D4" parent="." instance=ExtResource("6_bo7gb")]
+position = Vector2(3592, 1631)
+
 [node name="CharacterBody2D5" parent="." instance=ExtResource("6_bo7gb")]
 position = Vector2(3552, -10)
-max_health = 125
-speed = 1000
-accel = 2.5
-attack_player = true
-molding_stage = 1
 
 [node name="CharacterBody2D6" parent="." instance=ExtResource("6_bo7gb")]
-position = Vector2(3544, 1152)
-max_health = 125
-speed = 1000
-accel = 2.5
-attack_player = true
-molding_stage = 1
+position = Vector2(6071, 2606)
 
 [node name="CharacterBody2D7" parent="." instance=ExtResource("6_bo7gb")]
-position = Vector2(3520, 1688)
-max_health = 125
-speed = 1000
-accel = 2.5
-attack_player = true
-molding_stage = 1
+position = Vector2(5479, 2606)
 
 [node name="CharacterBody2D8" parent="." instance=ExtResource("6_bo7gb")]
-position = Vector2(1944, 1720)
-max_health = 125
-speed = 1000
-accel = 2.5
-attack_player = true
-molding_stage = 1
+position = Vector2(2566, 4934)
 
 [node name="CharacterBody2D9" parent="." instance=ExtResource("6_bo7gb")]
-position = Vector2(560, 1744)
-max_health = 125
-speed = 1000
-accel = 2.5
-attack_player = true
-molding_stage = 1
+position = Vector2(3414, 4981)
 
 [node name="CharacterBody2D10" parent="." instance=ExtResource("6_bo7gb")]
-position = Vector2(528, 2992)
-max_health = 125
-speed = 1000
-accel = 2.5
-attack_player = true
-molding_stage = 1
+position = Vector2(4073, 4974)
 
 [node name="CharacterBody2D11" parent="." instance=ExtResource("6_bo7gb")]
-position = Vector2(1816, 3080)
-max_health = 125
-speed = 1000
-accel = 2.5
-attack_player = true
-molding_stage = 1
+position = Vector2(5183, 4995)
 
 [node name="CharacterBody2D12" parent="." instance=ExtResource("6_bo7gb")]
-position = Vector2(3160, 3112)
-max_health = 125
-speed = 1000
-accel = 2.5
-attack_player = true
-molding_stage = 1
+position = Vector2(6071, 5021)
 
 [node name="CharacterBody2D13" parent="." instance=ExtResource("6_bo7gb")]
-position = Vector2(4664, 3104)
-max_health = 125
-speed = 1000
-accel = 2.5
-attack_player = true
-molding_stage = 1
+position = Vector2(10142, 4957)
 
 [node name="CharacterBody2D14" parent="." instance=ExtResource("6_bo7gb")]
-position = Vector2(5856, 3168)
-max_health = 125
-speed = 1000
-accel = 2.5
-attack_player = true
-molding_stage = 1
+position = Vector2(10308, 3440)
 
 [node name="CharacterBody2D15" parent="." instance=ExtResource("6_bo7gb")]
-position = Vector2(5864, 2995)
-max_health = 125
-speed = 1000
-accel = 2.5
-attack_player = true
-molding_stage = 1
+position = Vector2(10278, 2088)
 
 [node name="CharacterBody2D16" parent="." instance=ExtResource("6_bo7gb")]
-position = Vector2(6296, 1632)
-max_health = 125
-speed = 1000
-accel = 2.5
-attack_player = true
-molding_stage = 1
-
-[node name="CharacterBody2D17" parent="." instance=ExtResource("6_bo7gb")]
-position = Vector2(6464, 1635)
-max_health = 125
-speed = 1000
-accel = 2.5
-attack_player = true
-molding_stage = 1
-
-[node name="CharacterBody2D18" parent="." instance=ExtResource("6_bo7gb")]
-position = Vector2(6192, 192)
-max_health = 125
-speed = 1000
-accel = 2.5
-attack_player = true
-molding_stage = 1
-
-[node name="CharacterBody2D19" parent="." instance=ExtResource("6_bo7gb")]
-position = Vector2(6032, 195)
-max_health = 125
-speed = 1000
-accel = 2.5
-attack_player = true
-molding_stage = 1
-
-[node name="CharacterBody2D20" parent="." instance=ExtResource("6_bo7gb")]
-position = Vector2(6096, 344)
-speed = 750
-accel = 2.5
-attack_player = true
-damage = 5
+position = Vector2(10271, 465)
 
 [node name="Drzwi" parent="." instance=ExtResource("4_tluvb")]
-position = Vector2(4142, -947)
+position = Vector2(6864, -968)
 metadata/direction = "up"
 metadata/Scene = ExtResource("5_h484c")
-
-[node name="CollisionShape2D" parent="Drzwi" index="0"]
-position = Vector2(444, 822.5)
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -265.0
@@ -209,4 +127,3 @@ fit_content = true
 [connection signal="area_entered" from="Player/PlayerDetector" to="Player" method="_on_player_detector_area_entered"]
 
 [editable path="Player"]
-[editable path="Drzwi"]

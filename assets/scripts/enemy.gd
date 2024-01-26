@@ -1,13 +1,15 @@
 extends CharacterBody2D
 
 @export var max_health = 200
-var health = max_health
+@onready var health = max_health
 
 @export var speed = 360
-@export var accel = 7
+@export var accel = 7.0
 @export var attack_player = false
 @export var damage = 1
+@export var molding_stage = 1
 
+var dead = false
 var target_node = null
 var home_pos = Vector2.ZERO
 
@@ -17,10 +19,11 @@ var rng = RandomNumberGenerator.new()
 @onready var player : CharacterBody2D = owner.get_node("Player")
 
 var knockbacked : bool = false
-var knock_direction_physics : Vector2 = Vector2()
+var knock_direction_physics : Vector2 = Vector2.ZERO
 
 func _ready():
 	home_pos = self.global_position
+	$Dummy/mold.frame = molding_stage
 	nav.path_desired_distance = 8
 	nav.target_desired_distance = 8
 	$HealthBar.max_value = max_health
@@ -33,6 +36,7 @@ func _ready():
 
 func receiveDamage(amount, knock_direction : Vector2):
 	target_node = player
+	print(health)
 	health -= amount
 	$HealthBar.value = health
 	$AudioStreamPlayer2D.pitch_scale = rng.randf_range(0.1, 2.0)
@@ -48,10 +52,11 @@ func _bleed(ticks, amount):
 	await get_tree().create_timer(0.4).timeout
 	for i in range(ticks):
 		print(i)
-		receiveDamage(amount, Vector2(0,0))
+		receiveDamage(amount/3, Vector2(0,0))
 		await get_tree().create_timer(1).timeout
 
 func die():
+	dead = true
 	$AnimationPlayer.play('ded')
 	await $AnimationPlayer.animation_finished
 	drop_item()
@@ -84,29 +89,19 @@ func knockback(knok_direction):
 	knockbacked = true
 	await get_tree().create_timer(0.1).timeout
 	knockbacked = false
+	knock_direction_physics = Vector2.ZERO
 
 func _physics_process(delta):
 	if nav.is_navigation_finished():
 		return
-
+	if health > 0:
+		$AnimationPlayer.play("move")
 	var axis = to_local(nav.get_next_path_position()).normalized()
-	velocity = axis*speed
+	if knockbacked || dead:
+		velocity = speed*knock_direction_physics/2
+	else:
+		velocity = velocity.lerp(axis*speed,accel*delta)
 	move_and_slide()
-
-
-	#var direction = Vector3()
-#
-	#if is_instance_valid(player):
-#
-		#nav.target_position = player.position
-		#direction = nav.get_next_path_position() - global_position
-		#direction = direction.normalized()
-		#if knockbacked:
-			#direction = knock_direction_physics * 10
-#
-		#velocity = velocity.lerp(direction * speed, accel * delta)
-#
-		#move_and_slide()
 
 func recalc_path():
 	if target_node:
@@ -117,7 +112,7 @@ func recalc_path():
 func OnBodyEntered(body):
 	if (body.name == "Player"):
 		attack_player = true
-		while attack_player:
+		while attack_player && !dead:
 			Global.player_damage.emit(damage)
 			await get_tree().create_timer(0.5).timeout
 

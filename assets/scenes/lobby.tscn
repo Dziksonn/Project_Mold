@@ -1,12 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://fudacns2hhxc"]
+[gd_scene load_steps=15 format=3 uid="uid://fudacns2hhxc"]
 
 [ext_resource type="PackedScene" uid="uid://dh4s221kgtc83" path="res://assets/scenes/player.tscn" id="1_dl7al"]
 [ext_resource type="Texture2D" uid="uid://bhfwj0h4o8usw" path="res://assets/art/lobby.png" id="2_jodbr"]
 [ext_resource type="PackedScene" uid="uid://bptxe5n601tay" path="res://assets/scenes/drzwi.tscn" id="3_ov6w6"]
-[ext_resource type="PackedScene" uid="uid://csfjlw13h66h6" path="res://assets/scenes/debug_bg_scene.tscn" id="4_51jbe"]
 [ext_resource type="PackedScene" uid="uid://i5c8tomtxio3" path="res://assets/scenes/PizzaRestaurantStage2.tscn" id="5_u3ai4"]
+[ext_resource type="Texture2D" uid="uid://blmg1facqqqec" path="res://assets/art/PIZZERIA.png" id="5_vssb1"]
 [ext_resource type="Script" path="res://assets/scripts/shop.gd" id="6_xnblg"]
-[ext_resource type="Texture2D" uid="uid://cx6egoy1bqpom" path="res://assets/art/shop.png" id="7_y6cno"]
+[ext_resource type="Texture2D" uid="uid://dvt8h0cp6d0ce" path="res://assets/art/szczur_sklep.png" id="7_msdo5"]
+[ext_resource type="FontFile" uid="uid://calcttk5u4fvw" path="res://assets/fonts/PixeloidSansBold-PKnYd.ttf" id="8_cm11c"]
 [ext_resource type="FontFile" uid="uid://ciwxw5qfslmqf" path="res://assets/fonts/PixeloidSans-mLxMm.ttf" id="8_wqpib"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cmtqn"]
@@ -22,7 +23,7 @@ size = Vector2(30.0007, 791)
 size = Vector2(9.33334, 255)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_itq6h"]
-size = Vector2(130, 230)
+size = Vector2(192, 230)
 
 [node name="lobby" type="Node2D"]
 
@@ -73,23 +74,7 @@ shape = SubResource("RectangleShape2D_no6py")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background"]
 position = Vector2(-512.333, -128.333)
 scale = Vector2(0.333333, 0.333333)
-polygon = PackedVector2Array(17, 384, 464.004, 382.103, 464, 355.999, 596, 356.999, 594.989, 381.547, 745.818, 380.907, 746, 363, 895, 361, 896.646, 380.267, 1231, 377.999, 1231, 338.999, 1392, 342.999, 1390, 373.999, 3080, 371, 3080, -9, 15, -15, 0, 0)
-
-[node name="Drzwi" parent="." instance=ExtResource("3_ov6w6")]
-position = Vector2(378, -300)
-collision_layer = 4
-metadata/Scene = ExtResource("4_51jbe")
-metadata/Direction = "up"
-
-[node name="CollisionShape2D" parent="Drzwi" index="0"]
-position = Vector2(444, 782.5)
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Drzwi"]
-offset_left = 412.0
-offset_top = 630.0
-offset_right = 557.0
-offset_bottom = 670.0
-text = "DEBUG"
+polygon = PackedVector2Array(17, 384, 418.999, 382.999, 418.999, 354.999, 638, 357.999, 638, 381.999, 745.818, 380.907, 1105, 375.999, 1103, 346.999, 1238, 346.999, 1237, 373.999, 3080, 371, 3080, -9, 15, -15, 0, 0)
 
 [node name="Drzwi2" parent="." instance=ExtResource("3_ov6w6")]
 position = Vector2(867, -300)
@@ -98,26 +83,36 @@ metadata/Scene = ExtResource("5_u3ai4")
 metadata/Direction = "up"
 
 [node name="CollisionShape2D" parent="Drzwi2" index="0"]
-position = Vector2(444, 782.5)
+position = Vector2(297.5, 783)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Drzwi2"]
-offset_left = 377.0
-offset_top = 641.0
-offset_right = 515.0
-offset_bottom = 681.0
-text = "Pizza Restaurant"
+[node name="Sprite2D" parent="Drzwi2" index="1"]
+scale = Vector2(3, 3)
+texture = ExtResource("5_vssb1")
+offset = Vector2(0, -46.84)
 
 [node name="Sklep" type="Area2D" parent="."]
 script = ExtResource("6_xnblg")
 
 [node name="Sprite2D" type="Sprite2D" parent="Sklep"]
-position = Vector2(523, 489)
-scale = Vector2(0.272603, 0.299213)
-texture = ExtResource("7_y6cno")
+position = Vector2(513, 479)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("7_msdo5")
+offset = Vector2(0, -19.06)
+hframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sklep"]
-position = Vector2(531, 474)
+position = Vector2(535, 474)
 shape = SubResource("RectangleShape2D_itq6h")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Sklep"]
+offset_left = 508.0
+offset_top = 372.0
+offset_right = 602.0
+offset_bottom = 412.0
+rotation = 0.248944
+theme_override_fonts/normal_font = ExtResource("8_cm11c")
+theme_override_font_sizes/normal_font_size = 27
+text = "SHOP"
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = 31.0
@@ -142,7 +137,7 @@ fit_content = true
 layout_mode = 0
 offset_left = 54.0
 offset_top = 73.0
-offset_right = 444.0
+offset_right = 448.0
 offset_bottom = 109.0
 theme_override_fonts/normal_font = ExtResource("8_wqpib")
 theme_override_font_sizes/normal_font_size = 16
@@ -153,5 +148,4 @@ fit_content = true
 [connection signal="area_entered" from="Sklep" to="Sklep" method="_on_area_entered"]
 [connection signal="area_exited" from="Sklep" to="Sklep" method="_on_area_exited"]
 
-[editable path="Drzwi"]
 [editable path="Drzwi2"]
