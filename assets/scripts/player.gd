@@ -94,9 +94,12 @@ func _process(delta):
 			if alt_cooldown <=0:
 				alt_attack()
 
-func shoot_knife(_direction):
+func shoot_knife(_direction,split):
 	var knife = preload("res://assets/scenes/knifeProjectile.tscn").instantiate()
 	knife.position = self.position
+	var attackpower = Global.Player_temp_data["attack_power"]
+	var Damage = rng.randi_range(attackpower-5,attackpower+5)
+	knife.damage = (Damage/split)*2
 	knife.apply_impulse(Vector2.RIGHT.rotated($Sprite2D/KnifeSprite.rotation+_direction)*projectileSpeed)
 	knife.rotation = $Sprite2D/KnifeSprite.rotation+_direction
 	get_tree().get_root().get_node(".").add_child(knife)
@@ -104,21 +107,22 @@ func shoot_knife(_direction):
 func alt_attack():
 	if(!canAttack):
 		return
-	alt_cooldown = 1.0 / ((attackSpeed)*2 -1) * 2
+	alt_cooldown = 1.0 / ((attackSpeed)*2) * 3
 	$Control/TextureProgressBar.value=alt_cooldown
+	$Control/TextureProgressBar.max_value=alt_cooldown
 	match Global.Player_temp_data["powerups"]["multishot"]:
 		1:
-			shoot_knife(0)
+			shoot_knife(0,1)
 		3:
-			shoot_knife(-PI/12)
-			shoot_knife(0)
-			shoot_knife(PI/12)
+			shoot_knife(-PI/12,3)
+			shoot_knife(0,3)
+			shoot_knife(PI/12,3)
 		5:
-			shoot_knife(-PI/6)
-			shoot_knife(-PI/12)
-			shoot_knife(0)
-			shoot_knife(PI/12)
-			shoot_knife(PI/6)
+			shoot_knife(-PI/6,5)
+			shoot_knife(-PI/12,5)
+			shoot_knife(0,5)
+			shoot_knife(PI/12,5)
+			shoot_knife(PI/6,5)
 
 func attack():
 	if(!canAttack):
@@ -243,9 +247,11 @@ func _refreshStats():
 
 
 func _on_player_detector_area_entered(area):
+	if(area.name == "End"):
+		var target = load("res://assets/scenes/lobby.tscn")
+		on_door_enter("up",target)
+		return
 	var direction = area.get_meta("Direction")
 	var scene = area.get_meta("Scene")
-	print(direction)
-	print(scene)
-	on_door_enter(area.get_meta("Direction"),area.get_meta("Scene"))
+	on_door_enter(direction,scene)
 

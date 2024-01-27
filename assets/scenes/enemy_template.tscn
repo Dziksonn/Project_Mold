@@ -255,7 +255,7 @@ collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AggroRange/Area2D"]
 shape = SubResource("CircleShape2D_mgdjm")
-debug_color = Color(0.996078, 0, 0.168627, 0.054902)
+debug_color = Color(0.996078, 0, 0.168627, 0)
 
 [node name="DeaggroRange" type="Node2D" parent="."]
 
@@ -270,7 +270,6 @@ debug_color = Color(0, 0.647059, 0.247059, 0)
 navigation_layers = 8
 avoidance_layers = 8
 avoidance_mask = 8
-debug_enabled = true
 
 [node name="RecalculateTimer" type="Timer" parent="NavigationAgent2D"]
 wait_time = 0.1

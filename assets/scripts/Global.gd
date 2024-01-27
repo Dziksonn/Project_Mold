@@ -51,7 +51,7 @@ var Player_Perma_Items : Dictionary = {
 var Player_temp_data : Dictionary = {
 	"attack_power" = 10,
 	"attack_speed" = 1,
-	"movement_speed" = 4000,
+	"movement_speed" = 400,
 	"hp" = 100,
 	"max_hp" = 100,
 	"is_dead" = false,
@@ -163,6 +163,7 @@ func _add_item(item:Item):
 		match upgrade:
 			"MaxHealth":
 				Player_temp_data["max_hp"] += item.statUpgrades[upgrade]
+				Player_temp_data["hp"] += item.statUpgrades[upgrade]
 			"MovementSpeed":
 				Player_temp_data["movement_speed"] += item.statUpgrades[upgrade]
 			"AttackSpeed":

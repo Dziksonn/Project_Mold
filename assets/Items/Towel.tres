@@ -7,6 +7,7 @@
 script = ExtResource("1_b8bdw")
 name = "Paper Towel"
 statUpgrades = {
+"AttackSpeed": 0.25,
 "MaxHealth": 25
 }
 texture = ExtResource("2_2aaf3")

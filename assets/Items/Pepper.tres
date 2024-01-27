@@ -7,7 +7,7 @@
 script = ExtResource("1_h0llr")
 name = "Pepper"
 statUpgrades = {
-"AttackSpeed": 1.0,
+"AttackSpeed": 0.25,
 "BleedingEnchance": null
 }
 texture = ExtResource("2_3tyou")

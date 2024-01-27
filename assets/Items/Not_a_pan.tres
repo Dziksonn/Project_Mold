@@ -7,6 +7,6 @@
 script = ExtResource("1_xpwwo")
 name = "Not a pan"
 statUpgrades = {
-"AttackPower": 10
+"AttackPower": 7
 }
 texture = ExtResource("2_fhxjm")

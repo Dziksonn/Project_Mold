@@ -36,14 +36,13 @@ func _ready():
 
 func receiveDamage(amount, knock_direction : Vector2):
 	target_node = player
-	print(health)
 	health -= amount
 	$HealthBar.value = health
 	$AudioStreamPlayer2D.pitch_scale = rng.randf_range(0.1, 2.0)
 	$AudioStreamPlayer2D.play()
 	$Dummy.modulate	= Color(1, 0.4, 0.4)
 	knockback(knock_direction)
-	if health <= 0:
+	if health <= 0 && !dead:
 		die()
 	await get_tree().create_timer(0.2).timeout
 	$Dummy.modulate	= Color(1, 1, 1)
@@ -51,9 +50,8 @@ func receiveDamage(amount, knock_direction : Vector2):
 func _bleed(ticks, amount):
 	await get_tree().create_timer(0.4).timeout
 	for i in range(ticks):
-		print(i)
 		receiveDamage(amount/3, Vector2(0,0))
-		await get_tree().create_timer(1).timeout
+		await get_tree().create_timer(1.5).timeout
 
 func die():
 	dead = true
@@ -66,7 +64,8 @@ func die():
 
 func drop_item():
 	var rarity
-	if(rng.randf_range(0,100) >= 10):
+	var treshold = 5 + molding_stage*10
+	if(rng.randf_range(0,100) <= treshold):
 		if(rng.randf_range(0,100) >= 25):
 			rarity = "rare"
 		else:
